@@ -1,19 +1,12 @@
 class ProjectsController < ApplicationController
-  before_filter :find_project, :only => [:show, :edit, :update, :destroy]
-  PROJECTS_PER_PAGE = 20
+  before_filter :find_project, :only => [:show, :update, :destroy]
 
   def index
-    @projects = Project.paginate(:page => params[:page], :per_page => PROJECTS_PER_PAGE)
+    render :json => Project.all
   end
 
   def show
-  end
-
-  def new
-    @project = Project.new
-  end
-
-  def edit
+    render :json => @project
   end
 
   def create

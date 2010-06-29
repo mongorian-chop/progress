@@ -1,19 +1,12 @@
 class TasksController < ApplicationController
-  before_filter :find_task, :only => [:show, :edit, :update, :destroy]
-  TASKS_PER_PAGE = 20
+  before_filter :find_task, :only => [:show, :update, :destroy]
 
   def index
-    @tasks = Task.paginate(:page => params[:page], :per_page => TASKS_PER_PAGE)
+    render :json => Task.all
   end
 
   def show
-  end
-
-  def new
-    @task = Task.new
-  end
-
-  def edit
+    render :json => @task
   end
 
   def create

@@ -1,19 +1,12 @@
 class TeamsController < ApplicationController
-  before_filter :find_team, :only => [:show, :edit, :update, :destroy]
-  TEAMS_PER_PAGE = 20
+  before_filter :find_team, :only => [:show, :update, :destroy]
 
   def index
-    @teams = Team.paginate(:page => params[:page], :per_page => TEAMS_PER_PAGE)
+    render :json => Team.all
   end
 
   def show
-  end
-
-  def new
-    @team = Team.new
-  end
-
-  def edit
+    render :json => @team
   end
 
   def create

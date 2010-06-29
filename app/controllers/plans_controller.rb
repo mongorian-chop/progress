@@ -1,19 +1,12 @@
 class PlansController < ApplicationController
-  before_filter :find_plan, :only => [:show, :edit, :update, :destroy]
-  PLANS_PER_PAGE = 20
+  before_filter :find_plan, :only => [:show, :update, :destroy]
 
   def index
-    @plans = Plan.paginate(:page => params[:page], :per_page => PLANS_PER_PAGE)
+    render :json => Plan.all
   end
 
   def show
-  end
-
-  def new
-    @plan = Plan.new
-  end
-
-  def edit
+    render :json => @plan
   end
 
   def create

@@ -1,20 +1,11 @@
 class PrioritiesController < ApplicationController
-  before_filter :find_priority, :only => [:show, :edit, :update, :destroy]
-  layout false
+  before_filter :find_priority, :only => [:show, :update, :destroy]
 
   def index
     render :json => Priority.all
   end
 
   def show
-    render :json => @priority
-  end
-
-  def new
-    render :json => Priority.new
-  end
-
-  def edit
     render :json => @priority
   end
 

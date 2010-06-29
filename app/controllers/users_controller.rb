@@ -1,19 +1,12 @@
 class UsersController < ApplicationController
-  before_filter :find_user, :only => [:show, :edit, :update, :destroy]
-  USERS_PER_PAGE = 20
+  before_filter :find_user, :only => [:show, :update, :destroy]
 
   def index
-    @users = User.paginate(:page => params[:page], :per_page => USERS_PER_PAGE)
+    render :json => User.all
   end
 
   def show
-  end
-
-  def new
-    @user = User.new
-  end
-
-  def edit
+    render :json => @user
   end
 
   def create
