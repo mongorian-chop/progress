@@ -17,8 +17,6 @@ $(document).ready(function () {
     /* プロジェクトツリー */
     $("#west-grid").jqGrid(westgrid);
 
-    //$("#gantt").jqGantt(gantt);
-
     /**
      * グローバル ツールバー
      */
@@ -77,64 +75,8 @@ $(document).ready(function () {
         var rowid = jQuery("#west-grid").getGridParam('selrow');
         if(rowid != null && rowid != 0) {
             edit_project(rowid);
-            //jQuery("#west-grid").editGridRow(rowid, {
-                //editCaption: "プロジェクトの編集",
-                //bSubmit: "保存",
-                //url: '/projects/edit',
-                //errorTextFormat: function(xhr) {
-                    //if(xhr.status == 403) {
-                        //logout();
-                    //}
-                    //return true;
-                //},
-                //reloadAfterSubmit:false,
-                //closeAfterEdit:true,
-                //closeOnEscape: true,
-                //afterShowForm: function(){
-                    //jQuery("#start_dt").datepicker({
-                        //showButtonPanel: true,
-                        //showOn: 'both',
-                        //buttonImage: '/img/icons/calendar.png',
-                        //buttonImageOnly: true,
-                        //numberOfMonths: 3,
-                        //beforeShow: function() {
-                            //e = $("#end_dt").val();
-                            //sp = e.split("/");
-                            //$("#start_dt").datepicker('option', 'maxDate', new Date(parseInt(sp[0]),parseInt(sp[1])-1,parseInt(sp[2])-1));
-                        ////},
-                        ////onClose: function(dateText, inst) {
-                            ////y = parseInt(inst.selectedYear);
-                            ////m = parseInt(inst.selectedMonth);
-                            ////d = parseInt(inst.selectedDay)+1;
-                            ////$("#end_dt").datepicker('option', 'minDate', new Date(y,m,d));
-                        //}
-                    //});
-                    //jQuery("#end_dt").datepicker({
-                        //showButtonPanel: true,
-                        //showOn: 'both',
-                        //buttonImage: '/img/icons/calendar.png',
-                        //buttonImageOnly: true,
-                        //showButtonPanel: true,
-                        //numberOfMonths: 3,
-                        //beforeShow: function(i) {
-                            //s = $("#start_dt").val();
-                            //console.log(s);
-                            //sp = s.split("/");
-                            //$("#end_dt").datepicker('option', 'minDate', new Date(parseInt(sp[0]),parseInt(sp[1])-1,parseInt(sp[2])+1));
-                        ////},
-                        ////onClose: function(dateText, inst) {
-                            ////y = parseInt(inst.selectedYear);
-                            ////m = parseInt(inst.selectedMonth);
-                            ////d = parseInt(inst.selectedDay)-1;
-                            ////$("#start_dt").datepicker('option', 'maxDate', new Date(y,m,d));
-                        //}
-                    //});
-                //}
-            //})
             }else{
                 alert_dlg("エラー", "プロジェクトを選択してください");
-                //viewModal("#alertmod",{gbox:"#gbox_edit_project",jqm:true});
-                //$("#jqg_alrt").focus();
             }
     });
     $("#del-project").click(function(){
@@ -159,8 +101,6 @@ $(document).ready(function () {
                 closeAfterEdit:true
             })
             }else{
-                //viewModal("#alertmod",{gbox:"#gbox_del_project",jqm:true});
-                //$("#jqg_alrt").focus();
                 alert_dlg("エラー", "プロジェクトを選択してください");
             }
     });
@@ -210,9 +150,6 @@ function gantt_show(rowid, project_name) {
             'from': f,
             'to': t
         });
-        //if($("#load_gantt").css('display') == 'block') {
-            //$("#load_gantt").toggle();
-        //}
     });
     $("#gantt_view span.ui-jqgrid-title").text(project_name);
     $("#ganttnav #prev").click(function() {
@@ -248,7 +185,6 @@ function toggle_btn(e) {
     }
     $("#task_view").toggle();
     $("#gantt_view").toggle();
-    //$("#gantt").toggle();
 }
 
 function confirm_dlg(title, msg) {

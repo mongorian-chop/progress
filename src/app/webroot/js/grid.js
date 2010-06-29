@@ -35,16 +35,6 @@ var task = {
         "担当者",
         "ステータス"
     ],
-    /*;
-    cellEdit: true,
-    cellsubmit: 'remote',
-    cellurl: '/tasks/edit',
-    afterEditCell: function(id,name,val,iRow,iCol) {
-        if(name == 'start_dt' || name == 'end_dt') {
-            jQuery("#"+iRow+"_"+name,"#task").datepicker({showButtonPanel: true});
-        }
-    },
-    */
     colModel: [
         {
             name: "id",
@@ -364,9 +354,6 @@ var westgrid = {
             })
             .setCaption(treedata.title)
             .trigger("reloadGrid");
-            //if($("#load_gantt").css('display') == 'none') {
-                //$("#load_gantt").toggle();
-            //}
             gantt_show(treedata.id, treedata.title);
         }
     }

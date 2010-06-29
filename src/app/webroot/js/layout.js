@@ -1,26 +1,7 @@
 var layoutSettings = {
     name: "appLayout",
     defaults: {
-        //size:                   "auto",
-        //minSize:                20,
-        //paneClass:              "pane",
-        resizerClass:           "ui-state-default",
-        //togglerClass:           "toggler",
-        //buttonClass:            "button",
-        //contentSelector:        ".content",
-        //contentIgnoreSelector:  "span",
-        //togglerLength_open:     35,
-        //togglerLength_closed:   35,
-        //hideTogglerOnSlide:     true,
-        //togglerTip_open:        "閉じる",
-        //togglerTip_closed:      "開く",
-        //resizerTip:             "サイズを変更",
-        //fxName:                 "slide",
-        //fxSpeed_open:           750,
-        //fxSpeed_close:          1500,
-        //fxSettings_open:        { easing: "easeInQuint" },
-        //fxSettings_close:       { easing: "easeOutQuint" },
-        //sliderTip:  "開く"
+        resizerClass:           "ui-state-default"
     },
     north: {
         spacing_open:           0,
@@ -68,6 +49,5 @@ var layoutSettings = {
                 jQuery("#task").setGridWidth($Pane.innerWidth()-2);
             }
         }
-    },
-    //resizerClass: 'ui-state-default',
+    }
 };
