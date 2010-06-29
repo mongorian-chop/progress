@@ -1,0 +1,4 @@
+%h2= t('New user')
+= render :partial => 'form', :locals => {:user => @user}
+%ul
+  %li= link_to t('Back'), users_path

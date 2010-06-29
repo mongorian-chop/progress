@@ -1,0 +1,7 @@
+%h2= t('Listing users')
+- if @users.empty?
+  %p= t('There are no users to show yet')
+- else
+  .users= render :partial => 'user', :collection => @users
+= will_paginate(@users)
+= link_to t('Create'), new_user_path

@@ -1,0 +1,6 @@
+%h2= t('Editing user')
+= render :partial => 'form', :locals => {:user => @user}
+%ul
+  %li= link_to t('Show'), @user
+  %li= link_to t('Back'), users_path
+  %li= link_to t('Delete'), @user, :confirm => t('Are you sure'), :method => :delete

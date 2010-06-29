@@ -82,9 +82,9 @@ class DATABASE_CONFIG {
         'driver' => 'mysql',
         'persistent' => false,
         'host' => 'localhost',
-        'login' => 'progress',
-        'password' => 'progress',
-        'database' => 'develop_progress',
+        'login' => 'root',
+        'password' => '',
+        'database' => 'progress_development',
         'prefix' => '',
     );
 
@@ -92,9 +92,9 @@ class DATABASE_CONFIG {
         'driver' => 'mysql',
         'persistent' => false,
         'host' => 'localhost',
-        'login' => 'progress',
-        'password' => 'progress',
-        'database' => 'test_progress',
+        'login' => 'root',
+        'password' => '',
+        'database' => 'progress_test',
         'prefix' => '',
     );
 
@@ -102,9 +102,9 @@ class DATABASE_CONFIG {
         'driver' => 'mysql',
         'persistent' => false,
         'host' => 'localhost',
-        'login' => 'progress',
-        'password' => 'progress',
-        'database' => 'progress',
+        'login' => 'root',
+        'password' => '',
+        'database' => 'progress_production',
         'prefix' => '',
     );
 }

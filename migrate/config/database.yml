@@ -1,8 +1,8 @@
 development:
   adapter: mysql
-  database: develop_progress
-  username: progress
-  password: progress
+  database: progress_development
+  username: root
+  password: 
   host: localhost
 test:
   adapter: mysql

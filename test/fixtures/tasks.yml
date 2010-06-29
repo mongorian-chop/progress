@@ -1,0 +1,21 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  name: MyString
+  description: MyString
+  start_on: 2010-06-29
+  end_on: 2010-06-29
+  project: 
+  priority: 
+  user: 
+  status: 
+
+two:
+  name: MyString
+  description: MyString
+  start_on: 2010-06-29
+  end_on: 2010-06-29
+  project: 
+  priority: 
+  user: 
+  status: 

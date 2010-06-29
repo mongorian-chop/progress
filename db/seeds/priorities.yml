@@ -1,0 +1,19 @@
+highest:
+  id: 1
+  name: highest
+
+high:
+  id: 2
+  name: hight
+
+middle:
+  id: 3
+  name: middle
+
+low:
+  id: 4
+  name: low
+
+lowest:
+  id: 5
+  name: lowest

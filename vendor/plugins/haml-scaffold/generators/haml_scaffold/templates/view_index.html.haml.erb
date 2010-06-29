@@ -1,0 +1,7 @@
+%h2= t('Listing <%= plural_name %>')
+- if @<%= plural_name %>.empty?
+  %p= t('There are no <%= plural_name %> to show yet')
+- else
+  .<%= plural_name %>= render :partial => '<%= singular_name %>', :collection => @<%= plural_name %>
+= will_paginate(@<%= plural_name %>)
+= link_to t('Create'), new_<%= singular_name %>_path

@@ -1,0 +1,10 @@
+log/*.log
+db/schema.rb
+db/*.sqlite3
+**/.Thumbs.db
+config/newrelic.yml
+VERSION
+.bundle/*
+vendor/bundle
+src/app/tmp/cache
+src/app/tmp/logs

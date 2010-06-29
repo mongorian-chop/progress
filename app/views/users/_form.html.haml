@@ -1,0 +1,31 @@
+- form_for user do |f|
+  = f.error_messages
+  %p
+    = f.label :login
+    %br
+    = f.text_field :login
+  %p
+    = f.label :crypted_password
+    %br
+    = f.text_field :crypted_password
+  %p
+    = f.label :password_salt
+    %br
+    = f.text_field :password_salt
+  %p
+    = f.label :persistence_token
+    %br
+    = f.text_field :persistence_token
+  %p
+    = f.label :login_count
+    %br
+    = f.text_field :login_count
+  %p
+    = f.label :current_login_at
+    %br
+    = f.datetime_select :current_login_at
+  %p
+    = f.label :last_login_at
+    %br
+    = f.datetime_select :last_login_at
+  %p= f.submit t('Submit')

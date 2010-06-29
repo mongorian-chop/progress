@@ -1,0 +1,35 @@
+free:
+  id: 1
+  name: free
+  max: 1
+  price: 0
+
+wood:
+  id: 2
+  name: wood
+  max: 3
+  price: 500
+
+bronze:
+  id: 3
+  name: bronze
+  max: 10
+  price: 1500
+
+silver:
+  id: 4
+  name: sivler
+  max: 20
+  price: 3000
+
+gold:
+  id: 5
+  name: gold
+  max: 50
+  price: 6000
+
+platinum:
+  id: 6
+  name: platinum
+  max: 100
+  price: 10000

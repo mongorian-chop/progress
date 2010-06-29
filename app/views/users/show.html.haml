@@ -1,0 +1,27 @@
+%h2= "User \"#{@user.to_param}\""
+- content_tag_for :div, @user do
+  %ul
+    %li
+      %strong Login:
+      =h @user.login
+    %li
+      %strong Crypted password:
+      =h @user.crypted_password
+    %li
+      %strong Password salt:
+      =h @user.password_salt
+    %li
+      %strong Persistence token:
+      =h @user.persistence_token
+    %li
+      %strong Login count:
+      =h @user.login_count
+    %li
+      %strong Current login at:
+      =h @user.current_login_at
+    %li
+      %strong Last login at:
+      =h @user.last_login_at
+%ul
+  %li= link_to t('Edit'), edit_user_path(@user)
+  %li= link_to t('Back'), users_path

@@ -1,0 +1,7 @@
+<% $I = 0; def increment; $I += 1 end %>
+<% 20.times do |n| %>
+team_<%= increment %>:
+  id: <%= $I %>
+  name: "チーム<%= $I %>"
+  plan_id: 5
+<% end %>

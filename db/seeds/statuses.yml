@@ -1,0 +1,11 @@
+idle:
+  id: 1
+  name: idle
+
+avtive:
+  id: 2
+  name: avtive
+
+terminate:
+  id: 3
+  name: terminate

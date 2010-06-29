@@ -1,0 +1,19 @@
+<% $I = 0; def increment; $I += 1 end %>
+<% 20.times do |n| %>
+user_<%= increment %>:
+  id: <%= $I %>
+  team_id: 1
+  login: "user_<%= $I %>"
+  first_name: "名<%= $I %>"
+  last_name: "姓<%= $I %>"
+  first_name_ruby: "めい<%= $I %>"
+  last_name_ruby: "せい<%= $I %>"
+  company: "株式会社<%= $I %>"
+  unit: "事業部<%= $I %>"
+  email: "user_<%= $I %>@example.com"
+  phone_number: "0011112222"
+  admin: t
+  crypted_password: 7eada64e39618f804d9425ae059d02ba043250ef37a655b159277541e35bed096faa9ee2fee67e280759d2ea14eb41e05d348bad3c4468ad40f4b9c2b0bfcb1b
+  password_salt: aeFmUrML-NmTHSvoadF8
+  persistence_token: 9989d3d5420a63c64b5ed6e858a45af6ecb67d8ed4036d525d61000b6144af5d7810a200663ae2226ad03b38efc6d237779de81f67921f0bcfb328ce41a9dfc8
+<% end %>
