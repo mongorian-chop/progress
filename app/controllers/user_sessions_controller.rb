@@ -7,7 +7,7 @@ class UserSessionsController < ApplicationController
     @user_session = UserSession.new(params[:user_session])
     if @user_session.save
       flash[:notice] = t('Logged in successfully')
-      redirect_back_or_default user_url
+      redirect_to root_url
     else
       flash[:notice] = t('Logged in failed')
       render :action => :new
@@ -17,6 +17,6 @@ class UserSessionsController < ApplicationController
   def destroy
     current_user_session.destroy
     flash[:notice] = t('You have been logged out')
-    redirect_back_or_default new_user_session_url
+    redirect_to root_url
   end
 end

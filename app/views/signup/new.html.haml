@@ -1,0 +1,12 @@
+- form_for @survey do |f|
+  = f.error_messages
+  %p
+    = f.label :name
+    %br
+    = f.text_field :name
+  - f.fields_for :questions do |builder|
+    %p
+      = builder.label :content, "Question"
+      %br
+      = builder.text_area :content, :rows => 3
+  = f.submit t('Signup')

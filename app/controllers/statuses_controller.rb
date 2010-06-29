@@ -1,4 +1,5 @@
 class StatusesController < ApplicationController
+  before_filter :require_user
   before_filter :find_status, :only => [:show, :update, :destroy]
 
   def index

@@ -8,7 +8,7 @@ class ApplicationController < ActionController::Base
   # Scrub sensitive parameters from your log
   # filter_parameter_logging :password
 
-  helper_method :current_user_session, :current_user
+  helper_method :current_user_session, :current_user, :logged_in?
 
   private
   def current_user_session
@@ -19,6 +19,10 @@ class ApplicationController < ActionController::Base
   def current_user
     return @current_user if defined?(@current_user)
     @current_user = current_user_session && current_user_session.user
+  end
+
+  def logged_in?
+    !!current_user
   end
 
   def store_location
@@ -34,7 +38,7 @@ class ApplicationController < ActionController::Base
     unless current_user
       store_location
       flash[:notice] = t('Login required')
-      redirect_to new_user_session_url
+      redirect_to login_url
       return false
     end
   end
@@ -43,7 +47,7 @@ class ApplicationController < ActionController::Base
     if current_user
       store_location
       flash[:notice] = t('Logout required')
-      redirect_to user_url
+      redirect_to root_url
       return false
     end
   end

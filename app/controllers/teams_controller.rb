@@ -1,4 +1,5 @@
 class TeamsController < ApplicationController
+  before_filter :require_user
   before_filter :find_team, :only => [:show, :update, :destroy]
 
   def index

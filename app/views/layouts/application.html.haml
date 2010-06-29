@@ -9,10 +9,15 @@
     %link{:href => '/stylesheets/application.css', :rel => 'stylesheet', :type => 'text/css'}
     %link{:rel => 'shortcut icon', :href => '/favicon.ico'}
     = stylesheet_link_tag 'application', :media => 'screen'
-    = javascript_include_tag :defaults
   %body
     #header
       %h1 Progress
+    #nav
+      %ul
+        - if logged_in?
+          %li= link_to t('Logout'), logout_path
+        - else
+          %li= link_to t('Login'), login_path
     #wrapper
       #main
         #flash

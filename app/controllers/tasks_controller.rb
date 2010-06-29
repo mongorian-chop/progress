@@ -1,4 +1,5 @@
 class TasksController < ApplicationController
+  before_filter :require_user
   before_filter :find_task, :only => [:show, :update, :destroy]
 
   def index

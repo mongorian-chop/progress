@@ -1,4 +1,5 @@
 class PlansController < ApplicationController
+  before_filter :require_user
   before_filter :find_plan, :only => [:show, :update, :destroy]
 
   def index

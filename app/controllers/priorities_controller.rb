@@ -1,4 +1,5 @@
 class PrioritiesController < ApplicationController
+  before_filter :require_user
   before_filter :find_priority, :only => [:show, :update, :destroy]
 
   def index
