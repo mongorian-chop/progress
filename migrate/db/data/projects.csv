@@ -1,0 +1,11 @@
+title, description, start_dt, end_dt, user_id, created, modified, deleted
+プロジェクト1, テスト用プロジェクト1個目です, 2009-10-5, 2009-10-20,1, <%= Time.now.strftime("%Y-%m-%d %H:%M:%S") %>, <%= Time.now.strftime("%Y-%m-%d %H:%M:%S") %>,0
+プロジェクト2, テスト用プロジェクト2個目です, 2009-10-12, 2009-10-18,1, <%= Time.now.strftime("%Y-%m-%d %H:%M:%S") %>, <%= Time.now.strftime("%Y-%m-%d %H:%M:%S") %>,0
+プロジェクト3, テスト用プロジェクト3個目です, 2009-10-14, 2009-10-31,2, <%= Time.now.strftime("%Y-%m-%d %H:%M:%S") %>, <%= Time.now.strftime("%Y-%m-%d %H:%M:%S") %>,0
+プロジェクト4, テスト用プロジェクト4個目です, 2009-10-1, 2009-10-31,2, <%= Time.now.strftime("%Y-%m-%d %H:%M:%S") %>, <%= Time.now.strftime("%Y-%m-%d %H:%M:%S") %>,0
+プロジェクト5, テスト用プロジェクト5個目です, 2009-9-1, 2009-10-31,2, <%= Time.now.strftime("%Y-%m-%d %H:%M:%S") %>, <%= Time.now.strftime("%Y-%m-%d %H:%M:%S") %>,0
+プロジェクト6, テスト用プロジェクト6個目です, 2009-10-8, 2009-10-31,2, <%= Time.now.strftime("%Y-%m-%d %H:%M:%S") %>, <%= Time.now.strftime("%Y-%m-%d %H:%M:%S") %>,0
+プロジェクト7, テスト用プロジェクト7個目です, 2009-10-8, 2009-10-31,2, <%= Time.now.strftime("%Y-%m-%d %H:%M:%S") %>, <%= Time.now.strftime("%Y-%m-%d %H:%M:%S") %>,0
+プロジェクト8, テスト用プロジェクト8個目です, 2009-10-2, 2009-10-31,2, <%= Time.now.strftime("%Y-%m-%d %H:%M:%S") %>, <%= Time.now.strftime("%Y-%m-%d %H:%M:%S") %>,0
+プロジェクト9, テスト用プロジェクト9個目です, 2009-4-10, 2009-10-31,2, <%= Time.now.strftime("%Y-%m-%d %H:%M:%S") %>, <%= Time.now.strftime("%Y-%m-%d %H:%M:%S") %>,0
+プロジェクト10, テスト用プロジェクト10個目です, 2009-10-8, 2009-10-31,2, <%= Time.now.strftime("%Y-%m-%d %H:%M:%S") %>, <%= Time.now.strftime("%Y-%m-%d %H:%M:%S") %>,0

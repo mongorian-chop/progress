@@ -1,0 +1,109 @@
+<div class="grid section ui-corner-all">
+<div class="ui-widget-header ui-corner-all header">
+    <h2>優先度マスター管理</h2>
+</div>
+<div class="tooltip shadow"></div>
+<a href="/admin/priorities/edit">新規登録</a>
+<table id="list" class="list" cellspacing="0" cellpadding="0" style="width: 400px;">
+<thead>
+<tr>
+<th style="width: 50px;" class="display_order">表示順</th>
+<th class="category_name">優先度</th>
+<th style="width: 100px;" class="action">操作</th>
+</tr>
+</thead>
+<tbody>
+<?php
+foreach($list as $_record) {
+?>
+<tr id="<?php echo $_record['Priority']['id'] ?>" class="ui-state-default">
+<td style="width: 50px;"><?php echo $_record['Priority']['display_order'] ?></td>
+<td style="width: 250px;"><?php echo $_record['Priority']['name'] ?></td>
+<td style="width: 100px;" class="action center">
+<div class="edit button do-submit ui-widget-header ui-corner-all header">
+<span class="">編集</span>
+</div>
+<div class="del button do-submit ui-widget-header ui-corner-all header">
+<span class="">削除</span>&nbsp;
+</div>
+</td>
+</tr>
+<?php } ?>
+</tbody>
+</table>
+<div class="form">
+<?php
+	echo $form->create('Priority', array('type'=>'post','url'=>array('controller' => 'priorities'),'action'=>'index', 'id'=>'form'));
+	echo $form->hidden('order', array('id'=>'order'));
+?>
+<div class="reset button do-submit ui-widget-header ui-corner-all header">
+<a href="/admin/priorities" >元に戻す</a>
+</div>
+<div class="reset button do-submit ui-widget-header ui-corner-all header">
+<?php
+	echo $form->submit('表示順の入替', array('name' => 'do_order'));
+?>
+</div>
+<?php
+    echo $form->end();
+?>
+</div>
+    
+<div class="clearfix"></div>
+</div>
+
+<script type="text/javascript">
+jQuery(function($) {
+	$("#list").sortable({
+		items: "tr" ,
+		axis: 'y',
+		stop : function(){
+			var data=[];
+			$("tr.ui-state-default","#list").each(function(i,v){
+				data.push(v.id);
+			});
+			$('#order').val(data.toString());
+		}
+	});
+
+    $(".edit").click(function (){
+        id = $(this).parent().parent().attr('id');
+        location.href='/admin/priorities/edit/'+id;
+    });
+    $(".del").click(function (){
+        id = $(this).parent().parent().attr('id');
+        del_alert("削除確認", "この優先度を削除しますか？", id);
+    });
+});
+
+function del_alert(title, msg, id) {
+    span = $("<span></span>");
+    p = $("<p></p>");
+    span.addClass('ui-icon ui-icon-alert');
+    tag = $("<div></div>");
+    tag.attr('title', title);
+    p.append(span);
+    p.append(msg);
+    tag.append(p);
+    tag.dialog({
+        bgiframe: true,
+        modal: true,
+        height: 100,
+        overlay: {
+            backgroundColor: '#000',
+            opacity: 0.5
+        },
+        buttons: {
+            'キャンセル': function() {
+                $(this).dialog('close');
+            },
+            '削除': function() {
+                location.href='/admin/priorities/del/'+id;
+            }
+        }
+    });
+}
+
+</script>
+
+<style>#list tr{cursor: s-resize}</style>

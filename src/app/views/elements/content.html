@@ -1,0 +1,64 @@
+<div id="task_view">
+<table id="task" class="scroll" cellpadding="0" cellspacing="0"></table>
+<div id="tasknav" class="scroll" style="text-align:center;"></div>
+</div>
+<div id="gantt_view" style="display:none;">
+<div id="gbox_gantt" class="ui-jqgrid ui-widget ui-widget-content">
+<div id="load_gantt" class="loading ui-state-default ui-state-active" style="display: none;">読み込み中...</div>
+<div id="gantt_title" class="ui-jqgrid-titlebar ui-widget-header ui-corner-tl ui-corner-tr ui-helper-clearfix"><span class="ui-jqgrid-title"></span></div>
+<div id="gantt"></div>
+<div style="text-align: center;" class="scroll ui-state-default ui-jqgrid-pager corner-bottom" id="ganttnav">
+  <div role="group" class="ui-pager-control" id="pg_ganttnav" style="width: 100%;">
+  <table cellspacing="0" cellpadding="0" border="0" role="row" style="width: 100%; table-layout: fixed;" class="ui-pg-table">
+    <tbody>
+      <tr>
+        <td align="left" id="ganttnav_left">
+          <table cellspacing="0" cellpadding="0" border="0" style="float: left; table-layout: auto;" class="ui-pg-table navtable">
+            <tbody>
+            <tr>
+                <td class="ui-pg-button ui-corner-all" id="prev-week">
+                  <span class="ui-icon ui-icon-seek-first"/>
+                </td>
+                <td class="ui-pg-button ui-corner-all" id="prev">
+                  <span class="ui-icon ui-icon-seek-prev"/>
+                </td>
+                <!--
+                <td class="ui-pg-button ui-state-disabled" style="width: 4px; cursor: default;">
+                    <span class="ui-separator"/>
+                </td>
+                <td class="ui-pg-button ui-corner-all" id="today">
+                  今日
+                </td>
+                <td class="ui-pg-button ui-state-disabled" style="width: 4px; cursor: default;">
+                    <span class="ui-separator"/>
+                </td>
+                -->
+                <td class="ui-pg-button ui-corner-all" id="next">
+                  <span class="ui-icon ui-icon-seek-next"/>
+                </td>
+                <td class="ui-pg-button ui-corner-all" id="next-week">
+                  <span class="ui-icon ui-icon-seek-end"/>
+                </td>
+                <!--
+                <td class="ui-pg-button ui-state-disabled" style="width: 4px; cursor: default;">
+                    <span class="ui-separator"/>
+                </td>
+                <td class="ui-pg-button ui-corner-all" id="date">
+                  日表示
+                </td>
+                <td class="ui-pg-button ui-corner-all" id="month">
+                  月表示
+                </td>
+                -->
+            </tr>
+            </tbody>
+          </table>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+</div>
+
+</div>
+</div>

@@ -1,0 +1,35 @@
+highest:
+  id: 1
+  name: 最高
+  display_order: 1
+  created: <%= Time.now.strftime("%Y-%m-%d %H:%M:%S") %>
+  modified: <%= Time.now.strftime("%Y-%m-%d %H:%M:%S") %>
+  deleted: 0
+high:
+  id: 2
+  name: 高い
+  display_order: 2
+  created: <%= Time.now.strftime("%Y-%m-%d %H:%M:%S") %>
+  modified: <%= Time.now.strftime("%Y-%m-%d %H:%M:%S") %>
+  deleted: 0
+middle:
+  id: 3
+  name: 普通
+  display_order: 3
+  created: <%= Time.now.strftime("%Y-%m-%d %H:%M:%S") %>
+  modified: <%= Time.now.strftime("%Y-%m-%d %H:%M:%S") %>
+  deleted: 0
+low:
+  id: 4
+  name: 低い
+  display_order: 4
+  created: <%= Time.now.strftime("%Y-%m-%d %H:%M:%S") %>
+  modified: <%= Time.now.strftime("%Y-%m-%d %H:%M:%S") %>
+  deleted: 0
+lowest:
+  id: 5
+  name: 最低
+  display_order: 5
+  created: <%= Time.now.strftime("%Y-%m-%d %H:%M:%S") %>
+  modified: <%= Time.now.strftime("%Y-%m-%d %H:%M:%S") %>
+  deleted: 0

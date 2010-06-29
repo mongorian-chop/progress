@@ -1,0 +1,4 @@
+id,corporation, name, name_ruby, mail_address, password, tel, unit, created, modified, deleted
+1,株式会社テスト,テストユーザ1,テストユーザ1,test1@test.jp,8628a401c69cb4f00e607ebc7960611db7ff82dc,テスト事業部   , <%= Time.now.strftime("%Y-%m-%d %H:%M:%S") %>, <%= Time.now.strftime("%Y-%m-%d %H:%M:%S") %>,0,
+2,株式会社テスト,テストユーザ2,テストユーザ1,test2@test.jp,8628a401c69cb4f00e607ebc7960611db7ff82dc,テスト事業部・デザイン課 , <%= Time.now.strftime("%Y-%m-%d %H:%M:%S") %>, <%= Time.now.strftime("%Y-%m-%d %H:%M:%S") %>,0,
+3,株式会社テスト,テストユーザ3,テストユーザ1,test3@test.jp,8628a401c69cb4f00e607ebc7960611db7ff82dc,テスト事業部・デザイン課 , <%= Time.now.strftime("%Y-%m-%d %H:%M:%S") %>, <%= Time.now.strftime("%Y-%m-%d %H:%M:%S") %>,0,

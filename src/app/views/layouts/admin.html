@@ -1,0 +1,25 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ja" lang="ja">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title><?php echo $title_for_layout; ?></title>
+    <?php echo $this->element('admin_jquery'); ?>
+    <link type="text/css" href="/css/admin.css" rel="stylesheet" />
+</head>
+<body>
+<div class="ui-widget-header ui-corner-all header">
+    <ul class="menu">
+        <li><a href="/admin/users">ユーザー管理</a></li>
+        <li class="submenu">マスター管理<span class="ui-icon ui-icon-triangle-1-s"></span>
+            <ul style="display:none">
+                <li><a href="/admin/priorities">優先度マスター</a></li>
+                <li><a href="/admin/statuses">ステータスマスター</a></li>
+            </ul>
+        </li>
+        <li><a href="/admin/users/logout">ログアウト</a></li>
+    </ul>
+</div>
+<?php echo $content_for_layout; ?>
+</body>
+</html>

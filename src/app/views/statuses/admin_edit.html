@@ -1,0 +1,45 @@
+<?php
+if($this->data['Status']['id'] == '_new') {
+    $action = '登録';
+}else{
+    $action = '変更';
+}
+?>
+<div class="grid section ui-corner-all">
+<div class="ui-widget-header ui-corner-all header">
+    <h2>ユーザー<?php echo $action; ?></h2>
+</div>
+<div class="tooltip shadow"></div>
+<?php
+    echo $form->create('Status', array('type'=>'post','url'=>array('controller' => 'statuses'),'action'=>'edit','id'=>'form'));
+?>
+<?php
+echo $form->input('id', array('type' => 'hidden', 'label'=>'ID'));
+echo $form->input('name', array('label'=>'名前', 'class' => 'required', 'maxlength' => '50','title'=>'名前を入力してください。<br/>50文字まで入力できます。'));
+?>
+<div class="do-submit button ui-widget-header ui-corner-all header">
+<?php
+echo $form->submit('優先度を'.$action.'する', array('name' => 'do_save_user'));
+?>
+</div>
+<div class="do-submit button ui-widget-header ui-corner-all header">
+<?php
+echo $form->submit('キャンセル', array('name' => 'do_cancel'));
+?>
+</div>
+<?php
+echo $form->end();
+?>
+<form>
+<div class="clearfix"></div>
+</div>
+
+<script type="text/javascript" >
+
+$(document).ready(function(){
+    $('#form').validate({
+        errorElement: 'div',
+        errorClass: 'error-message',
+    }).form();
+});
+</script>

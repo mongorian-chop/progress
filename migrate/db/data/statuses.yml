@@ -1,0 +1,21 @@
+idle:
+  id: 1
+  name: 未対応
+  display_order: 1
+  created: <%= Time.now.strftime("%Y-%m-%d %H:%M:%S") %>
+  modified: <%= Time.now.strftime("%Y-%m-%d %H:%M:%S") %>
+  deleted: 0
+avtive:
+  id: 2
+  name: 作業中
+  display_order: 2
+  created: <%= Time.now.strftime("%Y-%m-%d %H:%M:%S") %>
+  modified: <%= Time.now.strftime("%Y-%m-%d %H:%M:%S") %>
+  deleted: 0
+terminate:
+  id: 3
+  name: 完了
+  display_order: 3
+  created: <%= Time.now.strftime("%Y-%m-%d %H:%M:%S") %>
+  modified: <%= Time.now.strftime("%Y-%m-%d %H:%M:%S") %>
+  deleted: 0
