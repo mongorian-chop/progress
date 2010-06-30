@@ -3,7 +3,7 @@ class ProjectsController < ApplicationController
   before_filter :find_project, :only => [:show, :update, :destroy]
 
   def index
-    render :json => Project.al.map(&:attributes)l
+    render :json => Project.al.map(&:attributes)
   end
 
   def show
