@@ -1,10 +1,58 @@
-%h2 Top page
-%h3 JSON API
-%ul
-  %li= link_to priorities_path, priorities_path
-  %li= link_to statuses_path, statuses_path
-  %li= link_to plans_path, plans_path
-  %li= link_to teams_path, teams_path
-  %li= link_to users_path, users_path
-  %li= link_to projects_path, projects_path
-  %li= link_to tasks_path, tasks_path
+= javascript_include_tag '/javascripts/app.js'
+= javascript_include_tag '/javascripts/layout.js'
+= javascript_include_tag '/javascripts/grid.js'
+.ui-layout-north.toolbar
+  %ul.toolbar
+    %li#new-project{:title => "\343\203\227\343\203\255\343\202\270\343\202\247\343\202\257\343\203\210\343\201\256\344\275\234\346\210\220"}
+      %span.new-project>
+      新規作成
+    %li#edit-project{:title => "\343\203\227\343\203\255\343\202\270\343\202\247\343\202\257\343\203\210\343\201\256\347\267\250\351\233\206"}
+      %span.edit-project>
+      編集
+    %li#del-project{:title => "\343\203\227\343\203\255\343\202\270\343\202\247\343\202\257\343\203\210\343\201\256\345\211\212\351\231\244"}
+      %span.del-project>
+      削除
+    %li.split
+    %li#view-task.hover{:title => "\343\202\277\343\202\271\343\202\257\343\202\222\350\241\250\347\244\272"}
+      %span.view-task>
+      タスクビュー
+    %li#view-gantt{:title => "\343\202\254\343\203\263\343\203\210\343\202\222\350\241\250\347\244\272"}
+      %span.view-gantt>
+      ガントビュー
+    %li.split
+    %li#chg-pass{:title => "\343\203\221\343\202\271\343\203\257\343\203\274\343\203\211\343\202\222\345\244\211\346\233\264"}
+      %span.chg-pass>
+      パスワード変更
+    %li.split
+    %li#logout.right{:title => "\343\203\255\343\202\260\343\202\242\343\202\246\343\203\210\343\201\231\343\202\213"}
+      %span.logout>
+      ログアウト
+.ui-layout-west.tree
+  %table#west-grid.content
+#mainContent.ui-layout-center.ui-jqgrid
+  #task_view
+    %table#task.scroll{:cellpadding => "0", :cellspacing => "0"}
+    #tasknav.scroll{:style => "text-align:center;"}
+  #gantt_view{:style => "display:none;"}
+    #gbox_gantt.ui-jqgrid.ui-widget.ui-widget-content
+      #load_gantt.loading.ui-state-default.ui-state-active{:style => "display: none;"} 読み込み中...
+      #gantt_title.ui-jqgrid-titlebar.ui-widget-header.ui-corner-tl.ui-corner-tr.ui-helper-clearfix
+        %span.ui-jqgrid-title
+      #gantt
+      #ganttnav.scroll.ui-state-default.ui-jqgrid-pager.corner-bottom{:style => "text-align: center;"}
+        #pg_ganttnav.ui-pager-control{:role => "group", :style => "width: 100%;"}
+          %table.ui-pg-table{:border => "0", :cellpadding => "0", :cellspacing => "0", :role => "row", :style => "width: 100%; table-layout: fixed;"}
+            %tbody
+              %tr
+                %td#ganttnav_left{:align => "left"}
+                  %table.ui-pg-table.navtable{:border => "0", :cellpadding => "0", :cellspacing => "0", :style => "float: left; table-layout: auto;"}
+                    %tbody
+                      %tr
+                        %td#prev-week.ui-pg-button.ui-corner-all
+                          %span.ui-icon.ui-icon-seek-first
+                        %td#prev.ui-pg-button.ui-corner-all
+                          %span.ui-icon.ui-icon-seek-prev
+                        %td#next.ui-pg-button.ui-corner-all
+                          %span.ui-icon.ui-icon-seek-next
+                        %td#next-week.ui-pg-button.ui-corner-all
+                          %span.ui-icon.ui-icon-seek-end
