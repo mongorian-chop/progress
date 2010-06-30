@@ -17,6 +17,7 @@
         - if logged_in?
           %li= link_to t('Logout'), logout_path
         - else
+          %li= link_to t('Signup'), signup_path
           %li= link_to t('Login'), login_path
     #wrapper
       #main

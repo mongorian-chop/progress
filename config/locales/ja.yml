@@ -157,7 +157,7 @@ ja:
         price: 価格
 
       team: 
-        name: 名前
+        name: チーム名
         plan: プラン
         created_at: 登録日時
         updated_at: 更新日時
@@ -206,13 +206,14 @@ ja:
         password: パスワード
 
   application:
-    title: "Progress Gantt chart"
-    description: "簡単ガントチャート"
-    keywords: "ガントチャート,プロジェクト管理,無料"
+    title: Progress Gantt chart
+    description: 簡単ガントチャート
+    keywords: ガントチャート,プロジェクト管理,無料
 
   Account: アカウント
   Login: ログイン
   Logout: ログアウト
+  Signup: サインアップ
   Create: 登録
   Delete: 削除
   Edit: 編集

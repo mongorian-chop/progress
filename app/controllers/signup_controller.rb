@@ -1,12 +1,13 @@
 class SignupController < ApplicationController
   def new
-    @user_session = UserSession.new
+    @team = Team.new
+    @team.users.build
   end
 
   def create
     @user = User.new(params[:user])
     if @user.save
-      flash[:notice] = t('Signup successfully') 
+      flash[:notice] = t('Signup successfully')
       redirect_to root_url
     else
       render :action => :new

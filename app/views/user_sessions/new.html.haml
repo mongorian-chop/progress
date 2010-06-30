@@ -1,13 +1,12 @@
 %h2= t('Login')
 - form_for @user_session, :url => user_session_path do |f|
-  %fieldset
-    %p
-      = f.label :login
-      %br
-      = f.text_field :login
-    %p
-      = f.label :password
-      %br
-      = f.password_field :password
-    %p
-      = f.submit t('Login')
+  %p
+    = f.label :login
+    %br
+    = f.text_field :login
+  %p
+    = f.label :password
+    %br
+    = f.password_field :password
+  %p
+    = f.submit t('Login')

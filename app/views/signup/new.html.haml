@@ -1,12 +1,21 @@
-- form_for @survey do |f|
+%h2= t('Signup')
+- form_for @team do |f|
   = f.error_messages
   %p
     = f.label :name
     %br
     = f.text_field :name
-  - f.fields_for :questions do |builder|
+  - f.fields_for :users do |ff|
     %p
-      = builder.label :content, "Question"
+      = ff.label :login
       %br
-      = builder.text_area :content, :rows => 3
+      = ff.text_field :login
+    %p
+      = ff.label :password
+      %br
+      = ff.text_field :password
+    %p
+      = ff.label :password_confirmation
+      %br
+      = ff.text_field :password_confirmation
   = f.submit t('Signup')
