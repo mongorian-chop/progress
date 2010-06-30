@@ -1,0 +1,99 @@
+@charset "utf-8";
+.GNT_tbl {
+	margin: 0px;
+	padding: 0px;
+	font-size: 10px;
+	border-right-width: 1px;
+	border-bottom-width: 1px;
+	border-right-style: solid;
+	border-bottom-style: solid;
+	border-right-color: #333333;
+	border-bottom-color: #333333;
+}
+.GNT_tbl th, .GNT_tbl td {
+	background-image: url(/images/gnt_cell01.png);
+	background-repeat: no-repeat;
+	background-position: left top;
+}
+.GNT_tbl th.th02, .GNT_tbl td.td02 {
+	background-image: url(/images/gnt_cell02.png);
+}
+.GNT_tbl ul, .GNT_tbl li {
+	margin: 0px;
+	padding: 0px;
+}
+.GNT_tbl li {
+	list-style:none;
+}
+.GNT_tbl ul.GNT_calList {
+	zoom: 100%;
+}
+.GNT_tbl ul.GNT_calList:after {
+	content: " ";
+	clear: both;
+	height: 0;
+	display: block;
+	visibility: hidden;
+}
+.GNT_tbl ul.GNT_calList li {
+	float: left;
+}
+.GNT_tbl .GNT_year, .GNT_tbl .GNT_month {
+	background-image: url(/images/gnt_cell01.png);
+	background-repeat: no-repeat;
+	background-position: left top;
+	overflow: hidden;
+}
+.GNT_tbl .GNT_month02 {
+	background-image: url(/images/gnt_cell02.png);
+}
+.GNT_tbl .GNT_date {
+	background-image: url(/images/gnt_dates.png);
+	background-repeat: repeat-x;
+	height: 12px;
+}
+.GNT_tbl .GNT_date02 {
+	background-position: 0 -12px;
+}
+.GNT_tbl .GNT_day {
+	background-image: url(/images/gnt_days.png);
+	background-repeat: repeat-x;
+	height: 12px;
+	line-height: 12px;
+	background-color: #66CCCC;
+}
+.GNT_tbl th.GNT_head {
+	background-image: url(/images/gnt_cell02.png);
+	padding: 3px;
+}
+.GNT_tbl td.GNT_title {
+	padding: 3px;
+}
+.GNT_tbl .GNT_chart {
+	background-repeat: repeat-x;
+	background-position: left top;
+}
+.GNT_tbl .GNT_chart_date {
+	background-image: url(/images/gnt_chart_date.png);
+}
+.GNT_tbl .GNT_chart_week {
+	background-image: url(/images/gnt_chart_week.png);
+}
+.GNT_tbl .GNT_chart_month {
+	background-image: url(/images/gnt_chart_month.png);
+}
+.GNT_tbl .GNT_bar {
+	position: relative;
+	margin-top: 5px;
+	margin-bottom: 5px;
+}
+.GNT_tbl .GNT_bar_body {
+	background-color: #6699CC;
+	display: block;
+	line-height: 8px;
+	color: #FFFFFF;
+	text-align: right;
+	overflow: hidden;
+	border: 1px solid #333333;
+	margin-left: 1px;
+}
