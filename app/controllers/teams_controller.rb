@@ -3,17 +3,17 @@ class TeamsController < ApplicationController
   before_filter :find_team, :only => [:show, :update, :destroy]
 
   def index
-    render :json => Team.all
+    render :json => Team.all.map(&:attributes)
   end
 
   def show
-    render :json => @team
+    render :json => @team.attributes
   end
 
   def create
     @team = Team.new(params[:team])
     if @team.save
-      render :json => @team, :status => :created, :location => @team
+      render :json => @team.attributes, :status => :created, :location => @team
     else
       render :json => @team.errors, :status => :unprocessable_entity
     end

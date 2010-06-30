@@ -3,17 +3,17 @@ class ProjectsController < ApplicationController
   before_filter :find_project, :only => [:show, :update, :destroy]
 
   def index
-    render :json => Project.all
+    render :json => Project.al.map(&:attributes)l
   end
 
   def show
-    render :json => @project
+    render :json => @projec.attributest
   end
 
   def create
     @project = Project.new(params[:project])
     if @project.save
-      render :json => @project, :status => :created, :location => @project
+      render :json => @project.attributes, :status => :created, :location => @project
     else
       render :json => @project.errors, :status => :unprocessable_entity
     end

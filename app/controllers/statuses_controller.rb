@@ -3,17 +3,17 @@ class StatusesController < ApplicationController
   before_filter :find_status, :only => [:show, :update, :destroy]
 
   def index
-    render :json => Status.all
+    render :json => Status.all.map(&:attributes)
   end
 
   def show
-    render :json => @status
+    render :json => @status.attributes
   end
 
   def create
     @status = Status.new(params[:status])
     if @status.save
-      render :json => @status, :status => :created, :location => @status
+      render :json => @status.attributes, :status => :created, :location => @status
     else
       render :json => @status.errors, :status => :unprocessable_entity
     end

@@ -1,11 +1,19 @@
-# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+highest:
+  id: 1
+  name: highest
 
-one:
-  name: MyString
-  roman: MyString
-  display_order: 1
+high:
+  id: 2
+  name: hight
 
-two:
-  name: MyString
-  roman: MyString
-  display_order: 1
+middle:
+  id: 3
+  name: middle
+
+low:
+  id: 4
+  name: low
+
+lowest:
+  id: 5
+  name: lowest

@@ -2,7 +2,7 @@ class CreatePlans < ActiveRecord::Migration
   def self.up
     create_table :plans do |t|
       t.string  :name, :null => false, :limit => 255
-      t.integer :max, :null => false, :limit => 100
+      t.integer :max, :null => false, :limit => 65535
       t.integer :price, :null => false
     end
 

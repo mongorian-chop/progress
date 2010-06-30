@@ -3,17 +3,17 @@ class TasksController < ApplicationController
   before_filter :find_task, :only => [:show, :update, :destroy]
 
   def index
-    render :json => Task.all
+    render :json => Task.all.map(&:attributes)
   end
 
   def show
-    render :json => @task
+    render :json => @task.attributes
   end
 
   def create
     @task = Task.new(params[:task])
     if @task.save
-      render :json => @task, :status => :created, :location => @task
+      render :json => @task.attributes, :status => :created, :location => @task
     else
       render :json => @task.errors, :status => :unprocessable_entity
     end

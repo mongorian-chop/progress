@@ -3,17 +3,17 @@ class PlansController < ApplicationController
   before_filter :find_plan, :only => [:show, :update, :destroy]
 
   def index
-    render :json => Plan.all
+    render :json => Plan.all.map(&:attributes)
   end
 
   def show
-    render :json => @plan
+    render :json => @plan.attributes
   end
 
   def create
     @plan = Plan.new(params[:plan])
     if @plan.save
-      render :json => @plan, :status => :created, :location => @plan
+      render :json => @plan.attributes, :status => :created, :location => @plan
     else
       render :json => @plan.errors, :status => :unprocessable_entity
     end

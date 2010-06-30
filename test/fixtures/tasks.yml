@@ -1,21 +1,13 @@
-# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
-
-one:
-  name: MyString
-  description: MyString
-  start_on: 2010-06-29
-  end_on: 2010-06-29
-  project: 
-  priority: 
-  user: 
-  status: 
-
-two:
-  name: MyString
-  description: MyString
-  start_on: 2010-06-29
-  end_on: 2010-06-29
-  project: 
-  priority: 
-  user: 
-  status: 
+<% $I = 0; def increment; $I += 1 end %>
+<% 20.times do |n| %>
+task_<%= increment %>:
+  id: <%= $I %>
+  name: "タスク<%= $I %>"
+  description: "タスク<%= $I %>の詳細"
+  start_on: 2010-06-01
+  end_on: 2010-06-07
+  project_id: 1
+  priority_id: 1
+  status_id: 1
+  user_id: 1
+<% end %>

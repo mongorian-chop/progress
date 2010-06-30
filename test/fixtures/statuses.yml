@@ -1,7 +1,11 @@
-# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+idle:
+  id: 1
+  name: idle
 
-one:
-  name: MyString
+avtive:
+  id: 2
+  name: avtive
 
-two:
-  name: MyString
+terminate:
+  id: 3
+  name: terminate
