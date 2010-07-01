@@ -119,7 +119,7 @@ $(document).ready(function () {
 function gantt_show(rowid, project_name) {
     /* ガントチャート*/
     var data;
-    $.getJSON('/tasks/get_task/'+rowid, function(json) {
+    $.getJSON('/tasks/'+rowid, function(json) {
         task = new Array;
         f = "";
         t = "";
@@ -336,10 +336,9 @@ function pickdates(id){
 }
 
 function init() {
-    //get_init_data("/projects/get_project_list", "project_id");
-    get_init_data("/priorities/get_priority",   "priority_id");
-    get_init_data("/users/get_user",            "user_id");
-    get_init_data("/statuses/get_status",       "status_id");
+    get_init_data("/priorities",   "priority_id");
+    get_init_data("/users",            "user_id");
+    get_init_data("/statuses",       "status_id");
 }
 
 function get_init_data(url, data) {

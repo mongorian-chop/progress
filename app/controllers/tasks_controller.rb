@@ -3,7 +3,7 @@ class TasksController < ApplicationController
   before_filter :find_task, :only => [:show, :update, :destroy]
 
   def index
-    render :json => Task.all.map(&:attributes)
+    render :json => {"rows" => Task.all.map(&:attributes)}
   end
 
   def show
