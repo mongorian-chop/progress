@@ -1,21 +1,38 @@
 %h2= t('Signup')
-- form_for @team do |f|
+- form_for @team, :url => signup_path do |f|
   = f.error_messages
+  %p
+    = f.label :plan, '', :for => 'team_plan_id'
+    %br
+    = select_by_model @team, :plan_id
   %p
     = f.label :name
     %br
     = f.text_field :name
   - f.fields_for :users do |ff|
+    = ff.hidden_field :admin
     %p
       = ff.label :login
       %br
       = ff.text_field :login
     %p
+      = ff.label :email
+      %br
+      = ff.text_field :email
+    %p
       = ff.label :password
       %br
-      = ff.text_field :password
+      = ff.password_field :password
     %p
       = ff.label :password_confirmation
       %br
-      = ff.text_field :password_confirmation
+      = ff.password_field :password_confirmation
+    %p
+      = ff.label :first_name
+      %br
+      = ff.text_field :first_name
+    %p
+      = ff.label :last_name
+      %br
+      = ff.text_field :last_name
   = f.submit t('Signup')

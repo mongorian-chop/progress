@@ -18,7 +18,7 @@ bronze:
 
 silver:
   id: 4
-  name: sivler
+  name: silver
   max: 20
   price: 3000
 

@@ -9,5 +9,4 @@ class PlanTest < Test::Unit::TestCase
   should ensure_length_of(:name).is_at_most(255)
   should validate_numericality_of(:max)
   should validate_numericality_of(:price)
-  should ensure_inclusion_of(:max).in_range(0..65535)
 end

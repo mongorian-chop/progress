@@ -230,3 +230,25 @@ ja:
   You have been logged out: ログアウトしました。
   Login required: ログインしてください。
   Logout required: ログアウトしてください。
+  Signup successfully: サインアップしました。
+  Please select: "--- 選択してください ---"
+
+  priority:
+    highest: 緊急
+    high: 高
+    middle: 普通
+    low: 低
+    lowest: いつかやる
+
+  status:
+    idle: 未着手
+    avtive: 作業中
+    terminate: 完了
+
+  plan:
+    free: フリー
+    wood: ウッド
+    bronze: ブロンズ
+    silver: シルバー
+    gold: ゴールド
+    platinum: プラチナ
