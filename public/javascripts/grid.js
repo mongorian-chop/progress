@@ -1,5 +1,5 @@
 var task = {
-    url: "/tasks/get_task/0",
+    url: "/tasks",
     datatype: "json",
     height: 'auto',
     loadComplete: function() {
@@ -43,7 +43,7 @@ var task = {
             key:true,
             search: false
         },{
-            name: "title",
+            name: "name",
             editable:true,
             editoptions: {size:50},
             editrules: { required: true },
@@ -61,7 +61,7 @@ var task = {
             resizable: true,
             edittype: "textarea"
         },{
-            name: "start_dt",
+            name: "start_on",
             editable: true,
             editoptions: { size:12 },
             formatter:'date',
@@ -71,7 +71,7 @@ var task = {
             resizable: false,
             width: 100
         },{
-            name: "end_dt",
+            name: "end_on",
             editable: true,
             editoptions: { size:12 },
             formatter:'date',
@@ -112,6 +112,10 @@ var task = {
             resizable: true,
             edittype: "select"
         }],
+    jsonReader: {
+        repeatitems: false,
+        root: "rows"
+    },
     autowidth: true,
     height: "440px",
     pager: '#tasknav',
@@ -142,7 +146,7 @@ var tasknav = {
             }
         },
         beforeInitData: function() {
-            get_init_data("/projects/get_project_list", "project_id");
+            get_init_data("/projects", "project_id");
         },
         afterShowForm: function(){
             jQuery("#start_dt").datepicker({
@@ -171,7 +175,7 @@ var tasknav = {
             });
         },
         afterSubmit: function() {
-            jQuery("#west-grid").setGridParam({url:"/projects/get_project/"})
+            jQuery("#west-grid").setGridParam({url:"/projects"})
                 .trigger("reloadGrid");
                 return true;
             }
@@ -252,7 +256,7 @@ var tasknav = {
 };
 
 var westgrid = {
-    url: "/projects/get_project",
+    url: "/projects",
     datatype: "json",
     height: "auto",
     colNames: ["id","プロジェクト", "詳細", "開始日", "終了日"],
@@ -263,7 +267,7 @@ var westgrid = {
             hidden:true,
             key:true
         },{
-            name: "title",
+            name: "name",
             editable:true,
             editoptions: {size:12},
             editrules: {
@@ -287,7 +291,7 @@ var westgrid = {
             sortable: false,
             edittype: "textarea"
         },{
-            name: "start_dt",
+            name: "start_on",
             hidden: true,
             editable: true,
             editoptions: {
@@ -301,7 +305,7 @@ var westgrid = {
             resizable: false,
             sortable: false
         },{
-            name: "end_dt",
+            name: "end_on",
             hidden: true,
             editable: true,
             editoptions: {
@@ -319,10 +323,14 @@ var westgrid = {
     caption: "プロジェクト",
     hidegrid: false,
     treeGrid: true,
-    ExpandColumn: "title",
+    ExpandColumn: "name",
     autowidth: true,
     pager: false,
     rowNum: 200,
+    jsonReader: {
+        repeatitems: false,
+        root: "rows"
+    },
     editurl: "/projects/edit",
     loadComplete: function() {
         pane = $(".ui-layout-west");
@@ -350,7 +358,7 @@ var westgrid = {
         current = $("#mainContent .ui-jqgrid-title:first").text();
         if(treedata.title != current) {
             jQuery("#task").setGridParam({
-                url: "/tasks/get_task/"+treedata.id
+                url: "/tasks/"+treedata.id
             })
             .setCaption(treedata.title)
             .trigger("reloadGrid");
