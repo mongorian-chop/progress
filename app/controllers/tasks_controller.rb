@@ -1,9 +1,10 @@
 class TasksController < ApplicationController
   before_filter :require_user
   before_filter :find_task, :only => [:show, :update, :destroy]
+  before_filter :find_project, :only => [:index]
 
   def index
-    render :json => {"rows" => Task.all.map(&:attributes)}
+    render :json => {"rows" =>  (@project ? @project.tasks : Task.all).map(&:attributes)}
   end
 
   def show
@@ -38,5 +39,9 @@ class TasksController < ApplicationController
   private
   def find_task
     @task = Task.find(params[:id]) if params[:id]
+  end
+
+  def find_project
+    @project = Project.find(params[:project_id]) if params[:project_id]
   end
 end
