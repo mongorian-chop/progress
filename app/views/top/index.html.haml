@@ -1,41 +1,38 @@
-= javascript_include_tag 'app.js'
-= javascript_include_tag 'layout.js'
-= javascript_include_tag 'grid.js'
 .ui-layout-north.toolbar
   %ul.toolbar
-    %li#new-project{:title => "\343\203\227\343\203\255\343\202\270\343\202\247\343\202\257\343\203\210\343\201\256\344\275\234\346\210\220"}
-      %span.new-project>
-      新規作成
-    %li#edit-project{:title => "\343\203\227\343\203\255\343\202\270\343\202\247\343\202\257\343\203\210\343\201\256\347\267\250\351\233\206"}
-      %span.edit-project>
-      編集
-    %li#del-project{:title => "\343\203\227\343\203\255\343\202\270\343\202\247\343\202\257\343\203\210\343\201\256\345\211\212\351\231\244"}
-      %span.del-project>
-      削除
+    %li#new-project{:title => t('Create')}
+      %span.new-project
+      = t('Create')
+    %li#edit-project{:title => t('Edit')}
+      %span.edit-project
+      = t('Edit')
+    %li#del-project{:title => t('Delete')}
+      %span.del-project
+      = t('Delete')
     %li.split
-    %li#view-task.hover{:title => "\343\202\277\343\202\271\343\202\257\343\202\222\350\241\250\347\244\272"}
-      %span.view-task>
-      タスクビュー
-    %li#view-gantt{:title => "\343\202\254\343\203\263\343\203\210\343\202\222\350\241\250\347\244\272"}
-      %span.view-gantt>
-      ガントビュー
+    %li#view-task.hover{:title => t('Task view')}
+      %span.view-task
+      = t('Task view')
+    %li#view-gantt{:title => t('Gantt view')}
+      %span.view-gantt
+      = t('Gantt view')
     %li.split
-    %li#chg-pass{:title => "\343\203\221\343\202\271\343\203\257\343\203\274\343\203\211\343\202\222\345\244\211\346\233\264"}
-      %span.chg-pass>
-      パスワード変更
+    %li#chg-pass{:title => t('Change password')}
+      %span.chg-pass
+      = t('Change password')
     %li.split
-    %li#logout.right{:title => "\343\203\255\343\202\260\343\202\242\343\202\246\343\203\210\343\201\231\343\202\213"}
-      %span.logout>
-      ログアウト
+    %li#logout.right{:title => t('Logout')}
+      %span.logout
+      = t('Logout')
 .ui-layout-west.tree
   %table#west-grid.content
 #mainContent.ui-layout-center.ui-jqgrid
   #task_view
     %table#task.scroll{:cellpadding => "0", :cellspacing => "0"}
-    #tasknav.scroll{:style => "text-align:center;"}
-  #gantt_view{:style => "display:none;"}
+    #tasknav.scroll{:style => "text-align:center"}
+  #gantt_view{:style => "display:none"}
     #gbox_gantt.ui-jqgrid.ui-widget.ui-widget-content
-      #load_gantt.loading.ui-state-default.ui-state-active{:style => "display: none;"} 読み込み中...
+      #load_gantt.loading.ui-state-default.ui-state-active{:style => "display:none"}= t('Now loading')
       #gantt_title.ui-jqgrid-titlebar.ui-widget-header.ui-corner-tl.ui-corner-tr.ui-helper-clearfix
         %span.ui-jqgrid-title
       #gantt

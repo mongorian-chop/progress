@@ -1,0 +1,29 @@
+!!! XML
+!!!
+%html{:'xml:lang' => 'ja', :lang => 'ja'}
+  %head
+    %meta{'http-equiv' => 'Content-Type', 'content' => 'text/html; charset=utf-8'}
+    %meta{'http-equiv' => 'Content-Style-Type', 'content' => 'text/css'}
+    %meta{'http-equiv' => 'Content-Script-Type', 'content' => 'text/javascript'}
+    %link{:rel => 'shortcut icon', :href => '/favicon.ico'}
+    %meta{:name => 'description', :content => yield(:description) || t('application.description')}
+    %meta{:name => 'keywords', :content => yield(:keywords) || t('application.keywords')}
+    %title= yield(:title) || t('application.title')
+    = javascript_include_tag 'http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js'
+    = javascript_include_tag 'http://ajax.googleapis.com/ajax/libs/jqueryui/1.7.2/jquery-ui.min.js'
+    = stylesheet_link_tag 'http://ajax.googleapis.com/ajax/libs/jqueryui/1.7.2/themes/flick/jquery-ui', :media => 'screen'
+    = javascript_include_tag 'libs/jquery.layout.min'
+    = javascript_include_tag 'libs/jquery.tools.min'
+    = javascript_include_tag 'libs/ui.datepicker-ja'
+    = javascript_include_tag 'libs/jquery.gantt'
+    = javascript_include_tag 'gantt'
+    = stylesheet_link_tag 'ui.jqgrid', :media => 'screen'
+    = javascript_include_tag 'libs/grid.locale-jp'
+    = javascript_include_tag 'libs/jquery.jqGrid.min'
+    = javascript_include_tag 'libs/jquery.tablednd'
+    = javascript_include_tag 'libs/jquery.contextmenu'
+    = stylesheet_link_tag 'style', :media => 'screen'
+    = javascript_include_tag 'app.js'
+    = javascript_include_tag 'layout.js'
+    = javascript_include_tag 'grid.js'
+  %body= yield

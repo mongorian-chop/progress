@@ -1,15 +1,16 @@
 .login.section.ui-corner-all
   .ui-widget-header.ui-corner-all.header
-    %h2 ログイン
+    %h2= t('Login')
   .tooltip.shadow
   - form_for @user_session, :url => user_session_path do |f|
     .input.text
       = f.label :login
-      = f.text_field :login, :class => "required email tips text ui-widget-content ui-corner-all", :title => "\343\203\241\343\203\274\343\203\253\343\202\242\343\203\211\343\203\254\343\202\271\343\202\222\345\205\245\345\212\233\343\201\227\343\201\246\343\201\217\343\201\240\343\201\225\343\201\204"
+      = f.text_field :login, :class => "required email tips text ui-widget-content ui-corner-all", :title => t('activerecord.attributes.user.login') + t('activerecord.errors.messages.blank')
     .input.password
       = f.label :password
-      = f.password_field :password, :class => "required tips text ui-widget-content ui-corner-all", :title => "\343\203\221\343\202\271\343\203\257\343\203\274\343\203\211\343\202\222\345\205\245\345\212\233\343\201\227\343\201\246\343\201\217\343\201\240\343\201\225\343\201\204"
+      = f.password_field :password, :class => "required tips text ui-widget-content ui-corner-all", :title => t('activerecord.attributes.user.password') + t('activerecord.errors.messages.blank')
     = f.submit t('Login'), :class => "login submit ui-state-default ui-corner-all"
+    = link_to t('Signup'), signup_path
   .clearfix
 :javascript
   $(document).ready(function() {

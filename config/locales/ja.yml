@@ -206,7 +206,7 @@ ja:
         password: パスワード
 
   application:
-    title: Progress Gantt chart
+    title: Progress Gantt Chart
     description: 簡単ガントチャート
     keywords: ガントチャート,プロジェクト管理,無料
 
@@ -232,6 +232,10 @@ ja:
   Logout required: ログアウトしてください。
   Signup successfully: サインアップしました。
   Please select: "--- 選択してください ---"
+  Now loading: 読み込み中…
+  Change password: パスワード変更
+  Gantt view: ガントビュー
+  Task view: タスクビュー
 
   priority:
     highest: 緊急
