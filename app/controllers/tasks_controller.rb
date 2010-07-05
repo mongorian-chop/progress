@@ -4,7 +4,7 @@ class TasksController < ApplicationController
   before_filter :find_project, :only => [:index]
 
   def index
-    render :json => {"rows" =>  (@project ? @project.tasks : Task.all).map(&:attributes)}
+    render :json => {"rows" => Task.jsonize(@project)}
   end
 
   def show
@@ -42,6 +42,6 @@ class TasksController < ApplicationController
   end
 
   def find_project
-    @project = Project.find(params[:project_id]) if params[:project_id]
+    @project = params[:project_id] ? Project.find(params[:project_id]) : nil
   end
 end
