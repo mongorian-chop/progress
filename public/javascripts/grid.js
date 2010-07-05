@@ -128,6 +128,22 @@ var task = {
     onSelectRow: function(rowid) {
         var treedata = $("#task").getRowData(rowid);
         var st = "#t"+treedata.id;
+    },
+    prmNames: {
+        page:"page",
+        rows:"rows",
+        sort: "sidx",
+        order: "sord",
+        search:"_search",
+        nd:"nd",
+        id:"id",
+        oper:"oper",
+        editoper:"edit",
+        addoper:"add",
+        deloper:"del",
+        subgridid:"id",
+        npage: null,
+        totalrows:"totalrows"
     }
 }
 
@@ -146,7 +162,7 @@ var tasknav = {
             }
         },
         beforeInitData: function() {
-            get_init_data("/projects", "project_id");
+            get_init_data3("/projects", "project_id");
         },
         afterShowForm: function(){
             jQuery("#start_on").datepicker({
@@ -194,7 +210,7 @@ var tasknav = {
             }
         },
         beforeInitData: function() {
-            get_init_data("/projects/get_project_list", "project_id");
+            get_init_data("/projects", "project_id");
 
         },
         afterShowForm: function(){
