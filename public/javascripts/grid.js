@@ -211,7 +211,22 @@ var tasknav = {
                 }
             });
         },
-        afterSubmit: function() {
+        onclickSubmit: function(params, data){
+            var d = {
+                'method': '_put',
+                'task[id]': data.id,
+                'task[name]': data.name,
+                'task[description]': data.description,
+                'task[start_on]': data.start_on,
+                'task[end_on]': data.end_on,
+                'task[project_id]': data.project_id,
+                'task[priority_id]': data.priority_id,
+                'task[user_id]': data.user_id,
+                'task[status_id]': data.status_id
+            };
+            return d;
+        },
+        afterSubmit: function(res, data) {
             jQuery("#west-grid").setGridParam({url:"/projects"})
                 .trigger("reloadGrid");
                 return true;
