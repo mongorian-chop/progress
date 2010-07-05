@@ -7,7 +7,15 @@ var version = "0.5";
  * application start.
  */
 
+var $priorities
+var $users
+var $statuses
+    /* initial data load. */
+    initalize();
+
 $(document).ready(function () {
+
+
     /* レイアウト */
     outerLayout = $('body').layout(layoutSettings);
 
@@ -132,13 +140,16 @@ function gantt_show(rowid, project_name) {
             d = json.rows[i];
             s = d["start_on"].replace(/-/g, "");
             e = d["end_on"].replace(/-/g, "");
+            pr = decode($priorities, d["priority_id"]);
+            us = decode($users, d["user_id"]);
+            st = decode($statuses, d["status_id"]);
             c = {
                 'titles': d["name"],
                 'start_date': s,
                 'end_date': e,
-                'priority': d["priprity_id"],
-                'user': d["user_id"],
-                'status': d["status_id"]
+                'priority': pr,
+                'user': us,
+                'status': st
             };
             task.push(c);
             if(!f || f > s) {
@@ -342,7 +353,7 @@ function pickdates(id){
 
 function init() {
     get_init_data("/priorities",   "priority_id");
-    get_init_data("/users",            "user_id");
+    get_init_data2("/users",            "user_id");
     get_init_data("/statuses",       "status_id");
 }
 
@@ -354,8 +365,50 @@ function get_init_data(url, data) {
         dataType: "json",
         async: false,
         label: data,
-        success: function(msg){
-            $("#task").setColProp(this.label, {editoptions: msg});
+        success: function(obj){
+            opt = "";
+            for(var i=0; i<obj.length; i++) {
+                opt += obj[i].id+":"+obj[i].name;
+                if(i+1 < obj.length) opt +=";";
+            }
+            $("#task").setColProp(this.label, {editoptions: {value:opt}});
+        }
+    });
+}
+function get_init_data2(url, data) {
+    var label = data;
+    $.ajax({
+        type: "GET",
+        url: url,
+        dataType: "json",
+        async: false,
+        label: data,
+        success: function(obj){
+            opt = "";
+            for(var i=0; i<obj.length; i++) {
+                opt += obj[i].id+":"+obj[i].last_name+" "+obj[i].first_name;
+                if(i+1 < obj.length) opt +=";";
+            }
+            $("#task").setColProp(this.label, {editoptions: {value:opt}});
+        }
+    });
+}
+function get_init_data3(url, data) {
+    var label = data;
+    $.ajax({
+        type: "GET",
+        url: url,
+        dataType: "json",
+        async: false,
+        label: data,
+        success: function(o){
+            opt = "";
+            obj = o["rows"];
+            for(var i=0; i<obj.length; i++) {
+                opt += obj[i].id+":"+obj[i].name;
+                if(i+1 < obj.length) opt +=";";
+            }
+            $("#task").setColProp(this.label, {editoptions: {value:opt}});
         }
     });
 }
@@ -401,6 +454,60 @@ function edit_project (rowid) {
                     $("#end_on").datepicker('option', 'minDate', new Date(parseInt(sp[0]),parseInt(sp[1])-1,parseInt(sp[2])+1));
                 }
             });
+        }
+    });
+}
+
+function decode(data, id) {
+    for(var i=0; i<data.length; i++) {
+        if(data[i].id == id && data[i].name != undefined) return data[i].name;
+        if(data[i].id == id && data[i].last_name != undefined) return data[i].last_name;
+    }
+    return false;
+}
+
+function initalize() {
+    getPriorities();
+    getUsers();
+    getStatuses();
+}
+
+function getPriorities() {
+    $.ajax({
+        url: '/priorities',
+        type: 'GET',
+        dataType: 'json',
+        async: false,
+        success: function(data, sts, req){
+            if(sts == "success") {
+                $priorities = data;
+            }
+        }
+    });
+}
+function getUsers() {
+    $.ajax({
+        url: '/users',
+        type: 'GET',
+        dataType: 'json',
+        async: false,
+        success: function(data, sts, req){
+            if(sts == "success") {
+                $users = data;
+            }
+        }
+    });
+}
+function getStatuses() {
+    $.ajax({
+        url: '/statuses',
+        type: 'GET',
+        dataType: 'json',
+        async: false,
+        success: function(data, sts, req){
+            if(sts == "success") {
+                $statuses = data;
+            }
         }
     });
 }
