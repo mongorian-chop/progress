@@ -149,28 +149,28 @@ var tasknav = {
             get_init_data("/projects", "project_id");
         },
         afterShowForm: function(){
-            jQuery("#start_dt").datepicker({
+            jQuery("#start_on").datepicker({
                 showButtonPanel: true,
                 showOn: 'both',
-                buttonImage: '/img/icons/calendar.png',
+                buttonImage: '/images/icons/calendar.png',
                 buttonImageOnly: true,
                 numberOfMonths: 3,
                 beforeShow: function() {
-                    e = $("#end_dt").val();
+                    e = $("#end_on").val();
                     sp = e.split("/");
-                    $("#start_dt").datepicker('option', 'maxDate', new Date(parseInt(sp[0]),parseInt(sp[1])-1,parseInt(sp[2])-1));
+                    $("#start_on").datepicker('option', 'maxDate', new Date(parseInt(sp[0]),parseInt(sp[1])-1,parseInt(sp[2])-1));
                 }
             });
-            jQuery("#end_dt").datepicker({
+            jQuery("#end_on").datepicker({
                 showButtonPanel: true,
                 showOn: 'both',
-                buttonImage: '/img/icons/calendar.png',
+                buttonImage: '/images/icons/calendar.png',
                 buttonImageOnly: true,
                 numberOfMonths: 3,
                 beforeShow: function() {
-                    e = $("#end_dt").val();
+                    e = $("#end_on").val();
                     sp = e.split("/");
-                    $("#start_dt").datepicker('option', 'maxDate', new Date(parseInt(sp[0]),parseInt(sp[1])-1,parseInt(sp[2])-1));
+                    $("#start_on").datepicker('option', 'maxDate', new Date(parseInt(sp[0]),parseInt(sp[1])-1,parseInt(sp[2])-1));
                 }
             });
         },
@@ -198,12 +198,12 @@ var tasknav = {
 
         },
         afterShowForm: function(){
-            $("#start_dt").datepicker('option', 'maxDate', null);
-            $("#end_dt").datepicker('option', 'minDate', null);
-            $("#start_dt").datepicker({
+            $("#start_on").datepicker('option', 'maxDate', null);
+            $("#end_on").datepicker('option', 'minDate', null);
+            $("#start_on").datepicker({
                 showButtonPanel: true,
                 showOn: 'both',
-                buttonImage: '/img/icons/calendar.png',
+                buttonImage: '/images/icons/calendar.png',
                 buttonImageOnly: true,
                 numberOfMonths: 3,
                 onClose: function(dateText, inst) {
@@ -211,14 +211,14 @@ var tasknav = {
                         y = parseInt(inst.selectedYear);
                         m = parseInt(inst.selectedMonth);
                         d = parseInt(inst.selectedDay)+1;
-                        $("#end_dt").datepicker('option', 'minDate', new Date(y,m,d));
+                        $("#end_on").datepicker('option', 'minDate', new Date(y,m,d));
                     }
                 }
             });
-            $("#end_dt").datepicker({
+            $("#end_on").datepicker({
                 showButtonPanel: true,
                 showOn: 'both',
-                buttonImage: '/img/icons/calendar.png',
+                buttonImage: '/images/icons/calendar.png',
                 buttonImageOnly: true,
                 numberOfMonths: 3,
                 onClose: function(dateText, inst) {
@@ -226,7 +226,7 @@ var tasknav = {
                         y = parseInt(inst.selectedYear);
                         m = parseInt(inst.selectedMonth);
                         d = parseInt(inst.selectedDay)-1;
-                        $("#start_dt").datepicker('option', 'maxDate', new Date(y,m,d));
+                        $("#start_on").datepicker('option', 'maxDate', new Date(y,m,d));
                     }
                 }
             });

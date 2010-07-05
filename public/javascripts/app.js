@@ -21,8 +21,8 @@ $(document).ready(function () {
      * グローバル ツールバー
      */
     $("#new-project").click(function(){
-        $("#start_dt").datepicker('option', 'maxDate', null);
-        $("#end_dt").datepicker('option', 'minDate', null);
+        $("#start_on").datepicker('option', 'maxDate', null);
+        $("#end_on").datepicker('option', 'minDate', null);
         jQuery("#west-grid").editGridRow("new",{
             addCaption: "プロジェクトの追加",
             bSubmit: "登録",
@@ -37,10 +37,10 @@ $(document).ready(function () {
             closeAfterAdd: true,
             closeOnEscape: true,
             afterShowForm: function(){
-                jQuery("#start_dt").datepicker({
+                jQuery("#start_on").datepicker({
                     showButtonPanel: true,
                     showOn: 'both',
-                    buttonImage: '/img/icons/calendar.png',
+                    buttonImage: '/images/icons/calendar.png',
                     buttonImageOnly: true,
                     numberOfMonths: 3,
                     onClose: function(dateText, inst) {
@@ -48,14 +48,14 @@ $(document).ready(function () {
                             y = parseInt(inst.selectedYear);
                             m = parseInt(inst.selectedMonth);
                             d = parseInt(inst.selectedDay)+1;
-                            $("#end_dt").datepicker('option', 'minDate', new Date(y,m,d));
+                            $("#end_on").datepicker('option', 'minDate', new Date(y,m,d));
                         }
                     }
                 });
-                jQuery("#end_dt").datepicker({
+                jQuery("#end_on").datepicker({
                     showButtonPanel: true,
                     showOn: 'both',
-                    buttonImage: '/img/icons/calendar.png',
+                    buttonImage: '/images/icons/calendar.png',
                     buttonImageOnly: true,
                     showButtonPanel: true,
                     numberOfMonths: 3,
@@ -64,7 +64,7 @@ $(document).ready(function () {
                             y = parseInt(inst.selectedYear);
                             m = parseInt(inst.selectedMonth);
                             d = parseInt(inst.selectedDay)-1;
-                            $("#start_dt").datepicker('option', 'maxDate', new Date(y,m,d));
+                            $("#start_on").datepicker('option', 'maxDate', new Date(y,m,d));
                         }
                     }
                 });
@@ -375,30 +375,30 @@ function edit_project (rowid) {
         closeAfterEdit:true,
         closeOnEscape: true,
         afterShowForm: function(){
-            jQuery("#start_dt").datepicker({
+            jQuery("#start_on").datepicker({
                 showButtonPanel: true,
                 showOn: 'both',
-                buttonImage: '/img/icons/calendar.png',
+                buttonImage: '/images/icons/calendar.png',
                 buttonImageOnly: true,
                 numberOfMonths: 3,
                 beforeShow: function() {
-                    e = $("#end_dt").val();
+                    e = $("#end_on").val();
                     sp = e.split("/");
-                    $("#start_dt").datepicker('option', 'maxDate', new Date(parseInt(sp[0]),parseInt(sp[1])-1,parseInt(sp[2])-1));
+                    $("#start_on").datepicker('option', 'maxDate', new Date(parseInt(sp[0]),parseInt(sp[1])-1,parseInt(sp[2])-1));
                 }
             });
-            jQuery("#end_dt").datepicker({
+            jQuery("#end_on").datepicker({
                 showButtonPanel: true,
                 showOn: 'both',
-                buttonImage: '/img/icons/calendar.png',
+                buttonImage: '/images/icons/calendar.png',
                 buttonImageOnly: true,
                 showButtonPanel: true,
                 numberOfMonths: 3,
                 beforeShow: function(i) {
-                    s = $("#start_dt").val();
+                    s = $("#start_on").val();
                     console.log(s);
                     sp = s.split("/");
-                    $("#end_dt").datepicker('option', 'minDate', new Date(parseInt(sp[0]),parseInt(sp[1])-1,parseInt(sp[2])+1));
+                    $("#end_on").datepicker('option', 'minDate', new Date(parseInt(sp[0]),parseInt(sp[1])-1,parseInt(sp[2])+1));
                 }
             });
         }
