@@ -372,6 +372,13 @@ select.FormElement {
     color:#FB223A;
 }
 
+.jqgrow {
+    background:url("images/ui-bg_highlight-soft_100_f6f6f6_1x100.png") repeat-x scroll 50% 50% #F6F6F6;
+    border:1px solid #CCCCCC;
+    color:#444444;
+}
+
+
 /**
  * gantt chart
  */
