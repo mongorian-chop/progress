@@ -119,21 +119,26 @@ $(document).ready(function () {
 function gantt_show(rowid, project_name) {
     /* ガントチャート*/
     var data;
-    $.getJSON('/tasks/'+rowid, function(json) {
+    if(rowid == 0) {
+        url = '/tasks';
+    }else{
+        url = '/projects/'+rowid+'/tasks';
+    }
+    $.getJSON(url, function(json) {
         task = new Array;
         f = "";
         t = "";
         for(i=0,l=json.rows.length; i < l; i++) {
-            d = json.rows[i].cell;
-            s = d[3].replace(/-/g, "");
-            e = d[4].replace(/-/g, "");
+            d = json.rows[i];
+            s = d["start_on"].replace(/-/g, "");
+            e = d["end_on"].replace(/-/g, "");
             c = {
-                'titles': d[1],
+                'titles': d["name"],
                 'start_date': s,
                 'end_date': e,
-                'priority': d[6],
-                'user': d[7],
-                'status': d[8]
+                'priority': d["priprity_id"],
+                'user': d["user_id"],
+                'status': d["status_id"]
             };
             task.push(c);
             if(!f || f > s) {

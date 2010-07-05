@@ -358,7 +358,7 @@ var westgrid = {
         current = $("#mainContent .ui-jqgrid-title:first").text();
         if(treedata.title != current) {
             jQuery("#task").setGridParam({
-                url: "/tasks/"+treedata.id
+                url: "/projects/"+treedata.id+"/tasks"
             })
             .setCaption(treedata.title)
             .trigger("reloadGrid");
