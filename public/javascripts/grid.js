@@ -33,7 +33,10 @@ var task = {
         "プロジェクト",
         "優先度",
         "担当者",
-        "ステータス"
+        "ステータス",
+        "優先度id",
+        "担当者id",
+        "ステータスid"
     ],
     colModel: [
         {
@@ -89,27 +92,45 @@ var task = {
             resizable: false,
             edittype: "select"
         },{
-            name: "priority_id",
-            editable: true,
+            name: "priority_name",
+            editable: false,
             editrules: { required: true },
             width:100,
             align: "center",
             resizable: false,
             edittype: "select"
         },{
-            name: "user_id",
-            editable: true,
+            name: "last_name",
+            editable: false,
             editrules: { required: true, edithidden: true },
             width:150,
             resizable: false,
             edittype: "select"
         },{
-            name: "status_id",
-            editable: true,
+            name: "status_name",
+            editable: false,
             editrules: { required: true, edithidden: true },
             width:100,
             align: "center",
             resizable: true,
+            edittype: "select"
+        },{
+            name: "priority_id",
+            hidden:true,
+            editable: true,
+            editrules: { required: true, edithidden: true },
+            edittype: "select"
+        },{
+            name: "user_id",
+            hidden:true,
+            editable: true,
+            editrules: { required: true, edithidden: true },
+            edittype: "select"
+        },{
+            name: "status_id",
+            hidden:true,
+            editable: true,
+            editrules: { required: true, edithidden: true },
             edittype: "select"
         }],
     jsonReader: {
