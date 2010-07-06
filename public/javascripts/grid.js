@@ -156,8 +156,8 @@ var task = {
     prmNames: {
         page:"page",
         rows:"rows",
-        sort: "sidx",
-        order: "sord",
+        sort: "sort",
+        order: "order",
         search:"_search",
         nd:"nd",
         id:"id",

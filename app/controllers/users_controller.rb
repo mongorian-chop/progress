@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_filter :find_user, :only => [:show, :update, :destroy]
+  before_filter :find_user, :only => [:index, :show, :update, :destroy]
 
   def index
     render :json => User.all.map(&:attributes)

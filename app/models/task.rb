@@ -7,6 +7,8 @@ class Task < ActiveRecord::Base
   validates_length_of :name, :maximum => 255
   validates_length_of :description, :maximum => 255
 
+  named_scope :order_by, lambda {|column, order| {:order => "#{column} #{(order ? order : 'ASC')}"} }
+
   named_scope :with_properties,
     :select => 'tasks.*,
       priorities.name  AS priority_name,
