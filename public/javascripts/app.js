@@ -268,11 +268,11 @@ function alert_dlg(title, msg) {
 }
 
 function change_password() {
-    h = '<div title="パスワード変更" class="ui-jqdialog-content ui-widget-content" id="editcntwest-grid"><span><form style="overflow: auto; width: 100%; position: relative; height: auto;" class="FormGrid" id="FrmGrid_change_password" name="FormPost"><table cellspacing="0" border="0" cellpading="0" class="EditTable" id="TblGrid_west-grid"><tbody><tr style="display: none;" id="FormError"><td colspan="2" class="ui-state-error"/></tr><tr rowpos="1" class="FormData" id="tr_old_password"><td class="CaptionTD ui-widget-content">旧パスワード</td><td style="white-space: pre;" class="DataTD ui-widget-content"> <input type="password" size="12" id="old_password" name="old_password" class="FormElement"/></td></tr><tr rowpos="1" class="FormData" id="tr_new_password"><td class="CaptionTD ui-widget-content">新パスワード</td><td style="white-space: pre;" class="DataTD ui-widget-content"> <input type="password" size="12" id="new_password" name="new_password" class="FormElement"/></td></tr></tbody></table></form></span></div>';
+    h = '<div title="パスワード変更" class="ui-jqdialog-content ui-widget-content" id="editcntwest-grid"><span><form style="overflow: auto; width: 100%; position: relative; height: auto;" class="FormGrid" id="FrmGrid_change_password" name="FormPost"><table cellspacing="0" border="0" cellpading="0" class="EditTable" id="TblGrid_west-grid"><tbody><tr style="display: none;" id="FormError"><td colspan="2" class="ui-state-error"/></tr><tr rowpos="1" class="FormData" id="tr_password"><td class="CaptionTD ui-widget-content">パスワード</td><td style="white-space: pre;" class="DataTD ui-widget-content"> <input type="password" size="12" id="password" name="password" class="FormElement"/></td></tr><tr rowpos="1" class="FormData" id="tr_password_confirmation"><td class="CaptionTD ui-widget-content">パスワード（確認）</td><td style="white-space: pre;" class="DataTD ui-widget-content"> <input type="password" size="12" id="password_confirmation" name="password_confirmation" class="FormElement"/></td></tr></tbody></table></form></span></div>';
 
     function checkLength(o, n, min, max) {
         if(o.val().length > max || o.val().length < min ) {
-            appendErr("3文字以上、20文字以内で入力してください");
+            appendErr(min+"文字以上、"+max+"文字以内で入力してください");
             return false;
         }
         return true;
@@ -285,8 +285,8 @@ function change_password() {
         return true;
     }
     function checkCompare(o, n) {
-        if(o.val() == n.val()) {
-            appendErr("新旧パスワードが同じです");
+        if(o.val() != n.val()) {
+            appendErr("パスワード不一致");
             return false;
         }
         return true;
@@ -299,7 +299,6 @@ function change_password() {
     $(h).dialog({
         bgiframe: true,
         resizable: false,
-        //height:105,
         minHeight:10,
         modal: true,
         overlay: {
@@ -313,25 +312,25 @@ function change_password() {
             '変更する': function() {
                 $("#FormError").css('display', 'none');
                 var bvalid = true;
-                old_pass = $("#old_password");
-                new_pass = $("#new_password");
-                bvalid = bvalid && checkLength(old_pass, "旧パスワード",3,20);
-                bvalid = bvalid && checkLength(new_pass, "新パスワード",3,20);
+                password = $("#password");
+                password_confirmation = $("#password_confirmation");
+                bvalid = bvalid && checkLength(password, "パスワード",3,20);
+                bvalid = bvalid && checkLength(password_confirmation, "パスワード（確認）",3,20);
 
-                bvalid = bvalid && checkRegexp(old_pass,/^([0-9a-za-z])+$/);
-                bvalid = bvalid && checkRegexp(new_pass,/^([0-9a-za-z])+$/);
+                bvalid = bvalid && checkRegexp(password,/^([0-9a-za-z])+$/);
+                bvalid = bvalid && checkRegexp(password_confirmation,/^([0-9a-za-z])+$/);
 
-                bvalid = bvalid && checkCompare(old_pass, new_pass);
+                bvalid = bvalid && checkCompare(password, password_confirmation);
                 f = $(this);
                 d = {
-                    'old_password': old_pass.val(),
-                    'new_password': new_pass.val()
+                    'password': password.val(),
+                    'password_confirmation': password_confirmation.val()
                 };
 
                 if(bvalid) {
                     $.ajax({
                         type: 'POST',
-                        url: '/users/change_password',
+                        url: '/user',
                         data: d,
                         success: function(msg) {
                             if(msg == "false") {
