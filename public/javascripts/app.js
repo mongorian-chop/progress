@@ -422,6 +422,71 @@ function get_init_data3(url, data) {
     });
 }
 
+function edit_task(rowid) {
+    jQuery("#task").editGridRow(rowid, {
+        editCaption: "タスクの編集",
+        bSubmit: "保存",
+        url: '/tasks/'+rowid,
+        mtype: 'PUT',
+        reloadAfterSubmit:true,
+        closeAfterEdit:true,
+        closeOnEscape: true,
+        loadError: function(xhr, st, err) {
+            if(xhr.status == 403) {
+                logout();
+            }
+        },
+        beforeInitData: function() {
+            get_init_data3("/projects", "project_id");
+        },
+        afterShowForm: function(){
+            jQuery("#start_on").datepicker({
+                showButtonPanel: true,
+                showOn: 'both',
+                buttonImage: '/images/icons/calendar.png',
+                buttonImageOnly: true,
+                numberOfMonths: 3,
+                beforeShow: function() {
+                    e = $("#end_on").val();
+                    sp = e.split("/");
+                    $("#start_on").datepicker('option', 'maxDate', new Date(parseInt(sp[0]),parseInt(sp[1])-1,parseInt(sp[2])-1));
+                }
+            });
+            jQuery("#end_on").datepicker({
+                showButtonPanel: true,
+                showOn: 'both',
+                buttonImage: '/images/icons/calendar.png',
+                buttonImageOnly: true,
+                numberOfMonths: 3,
+                beforeShow: function() {
+                    e = $("#end_on").val();
+                    sp = e.split("/");
+                    $("#start_on").datepicker('option', 'maxDate', new Date(parseInt(sp[0]),parseInt(sp[1])-1,parseInt(sp[2])-1));
+                }
+            });
+        },
+        onclickSubmit: function(params, data){
+            return {
+                'oper': "",
+                'task[id]': data.id,
+                'task[name]': data.name,
+                'task[description]': data.description,
+                'task[start_on]': data.start_on,
+                'task[end_on]': data.end_on,
+                'task[project_id]': data.project_id,
+                'task[priority_id]': data.priority_id,
+                'task[user_id]': data.user_id,
+                'task[status_id]': data.status_id
+            };
+        },
+        afterSubmit: function(res, data) {
+            jQuery("#west-grid").setGridParam({url:"/projects"})
+                .trigger("reloadGrid");
+                return true;
+        }
+    });
+}
+
 function edit_project (rowid) {
     jQuery("#west-grid").editGridRow(rowid, {
         editCaption: "プロジェクトの編集",

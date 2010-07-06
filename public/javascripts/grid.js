@@ -150,7 +150,8 @@ var task = {
         var st = "#t"+treedata.id;
     },
     ondblClickRow: function(rowid) {
-        $("#task").editGridRow(rowid);
+        /* $("#task").editGridRow(rowid); */
+        edit_task(rowid);
     },
     prmNames: {
         page:"page",
@@ -232,7 +233,7 @@ var tasknav = {
             jQuery("#west-grid").setGridParam({url:"/projects"})
                 .trigger("reloadGrid");
                 return true;
-            }
+        }
     },
     "add": {
         addCaption: "タスクの追加",
