@@ -173,7 +173,7 @@ var tasknav = {
     "edit": {
         editCaption: "タスクの編集",
         bSubmit: "保存",
-        url: '/tasks/edit',
+        mtype: 'PUT',
         reloadAfterSubmit:true,
         closeAfterEdit:true,
         closeOnEscape: true,
@@ -212,8 +212,9 @@ var tasknav = {
             });
         },
         onclickSubmit: function(params, data){
-            var d = {
-                'method': '_put',
+            this.url = "/tasks/"+data.id;
+            return {
+                'oper': "",
                 'task[id]': data.id,
                 'task[name]': data.name,
                 'task[description]': data.description,
@@ -224,7 +225,6 @@ var tasknav = {
                 'task[user_id]': data.user_id,
                 'task[status_id]': data.status_id
             };
-            return d;
         },
         afterSubmit: function(res, data) {
             jQuery("#west-grid").setGridParam({url:"/projects"})
@@ -235,7 +235,7 @@ var tasknav = {
     "add": {
         addCaption: "タスクの追加",
         bSubmit: "登録",
-        url: '/tasks/add',
+        url: '/tasks',
         reloadAfterSubmit: true,
         closeAfterAdd: true,
         closeOnEscape: true,
@@ -246,8 +246,21 @@ var tasknav = {
             }
         },
         beforeInitData: function() {
-            get_init_data("/projects", "project_id");
+            get_init_data3("/projects", "project_id");
 
+        },
+        onclickSubmit: function(params, data){
+            return {
+                'oper': "",
+                'task[name]': data.name,
+                'task[description]': data.description,
+                'task[start_on]': data.start_on,
+                'task[end_on]': data.end_on,
+                'task[project_id]': data.project_id,
+                'task[priority_id]': data.priority_id,
+                'task[user_id]': data.user_id,
+                'task[status_id]': data.status_id
+            };
         },
         afterShowForm: function(){
             $("#start_on").datepicker('option', 'maxDate', null);
@@ -292,11 +305,15 @@ var tasknav = {
         caption: "削除の確認",
         msg: "選択したタスクを削除しますか？",
         bSubmit: "削除",
-        url: '/tasks/del',
+        mtype: "DELETE",
         loadError: function(xhr, st, err) {
             if(xhr.status == 403) {
                 logout();
             }
+        },
+        beforeSubmit: function(id) {
+            this.url = '/tasks/'+id;
+            return [true,""];
         },
         reloadAfterSubmit:false,
         closeOnEscape: true,
