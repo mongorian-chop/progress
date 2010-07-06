@@ -34,7 +34,7 @@ $(document).ready(function () {
         jQuery("#west-grid").editGridRow("new",{
             addCaption: "プロジェクトの追加",
             bSubmit: "登録",
-            url: '/projects/add',
+            url: '/projects',
             errorTextFormat: function(xhr) {
                 if(xhr.status == 403) {
                     logout();
@@ -44,6 +44,15 @@ $(document).ready(function () {
             reloadAfterSubmit: true,
             closeAfterAdd: true,
             closeOnEscape: true,
+            onclickSubmit: function(params, data){
+                return {
+                    'oper': "",
+                    'project[name]': data.name,
+                    'project[description]': data.description,
+                    'project[start_on]': data.start_on,
+                    'project[end_on]': data.end_on
+                };
+            },
             afterShowForm: function(){
                 jQuery("#start_on").datepicker({
                     showButtonPanel: true,
@@ -94,7 +103,8 @@ $(document).ready(function () {
                 caption: "削除の確認",
                 msg: "選択したプロジェクトを削除しますか？",
                 bSubmit: "削除",
-                url: '/projects/del',
+                url: '/projects/'+rowid,
+                mtype: "DELETE",
                 errorTextFormat: function(xhr) {
                     if(xhr.status == 403) {
                         logout();
@@ -417,7 +427,8 @@ function edit_project (rowid) {
     jQuery("#west-grid").editGridRow(rowid, {
         editCaption: "プロジェクトの編集",
         bSubmit: "保存",
-        url: '/projects/edit',
+        url: '/projects/'+rowid,
+        mtype: "PUT",
         errorTextFormat: function(xhr) {
             if(xhr.status == 403) {
                 logout();
@@ -427,6 +438,16 @@ function edit_project (rowid) {
         reloadAfterSubmit:false,
         closeAfterEdit:true,
         closeOnEscape: true,
+        onclickSubmit: function(params, data){
+            return {
+                'oper': "",
+                'project[id]': data.id,
+                'project[name]': data.name,
+                'project[description]': data.description,
+                'project[start_on]': data.start_on,
+                'project[end_on]': data.end_on
+            };
+        },
         afterShowForm: function(){
             jQuery("#start_on").datepicker({
                 showButtonPanel: true,
