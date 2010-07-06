@@ -149,6 +149,9 @@ var task = {
         var treedata = $("#task").getRowData(rowid);
         var st = "#t"+treedata.id;
     },
+    ondblClickRow: function(rowid) {
+        $("#task").editGridRow(rowid);
+    },
     prmNames: {
         page:"page",
         rows:"rows",
