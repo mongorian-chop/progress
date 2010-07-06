@@ -138,7 +138,6 @@ var task = {
         root: "rows"
     },
     autowidth: true,
-    height: "440px",
     pager: '#tasknav',
     rowNum: 20,
     viewrecords: true,
