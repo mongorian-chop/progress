@@ -237,6 +237,7 @@ ul.toolbar li a:hover {
 .ui-state-default {
     background-color:#CAD9EC;
     background-image: none;
+    opacity:1;
 }
 .resizer-west-closed {
     border-top:1px solid #99BBE8;
