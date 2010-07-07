@@ -329,8 +329,8 @@ function change_password() {
 
                 if(bvalid) {
                     $.ajax({
-                        type: 'POST',
-                        url: '/user',
+                        type: 'PUT',
+                        url: '/account',
                         data: d,
                         success: function(msg) {
                             if(msg == "false") {
