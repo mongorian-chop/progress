@@ -4,11 +4,13 @@ class TasksController < ApplicationController
   before_filter :find_project, :only => [:index]
 
   def index
-    render :json => {"rows" => Task.jsonize(@project)}
+    sort = params[:sort].blank? ? 'id' : params[:sort]
+    order = params[:order].blank? ? 'ASC' : params[:order]
+    render :json => {"rows" => Task.jsonize(@project, sort, order)}
   end
 
   def show
-    render :json => @task.attributes
+    render :json => Task.localize(@task.attributes)
   end
 
   def create
