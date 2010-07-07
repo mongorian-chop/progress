@@ -77,6 +77,7 @@ Language = {
     },
     gantt: {
         caption:  "\u30ac\u30f3\u30c8\u30c1\u30e3\u30fc\u30c8",
+        title: "\u30bf\u30b9\u30af"
     },
     layout: {
         toggle: {

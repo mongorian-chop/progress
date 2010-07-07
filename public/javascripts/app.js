@@ -170,7 +170,7 @@ function gantt_show(rowid, project_name) {
             }
         }
         $("#gantt").gantt({
-            'titles': new Array('タスク'),
+            'titles': new Array($l.gantt.title),
             'defaultRange': 1,
             'tasks': task,
             'from': f,

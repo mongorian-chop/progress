@@ -77,6 +77,7 @@ Language = {
     },
     gantt: {
         caption:  "Gantt Chart",
+        title: "Task"
     },
     layout: {
         toggle: {
