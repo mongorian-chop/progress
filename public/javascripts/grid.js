@@ -9,11 +9,11 @@ var task = {
         $("#task tr").each(function(i){
             id = $(this).attr("id");
             row = $("#task").getRowData(id);
-            if(row.status_id == "完了") {
+            if(row.status_id == 3) {
                 c = $(this).children();
                 c.addClass("task-terminated");
             }
-            if(row.priority_id == "最高") {
+            if(row.priority_id == 0) {
                 c = $(this).children();
                 c.addClass("task-highest");
             }
@@ -25,18 +25,18 @@ var task = {
         }
     },
     colNames: [
-        "id",
-        "タスク",
-        "詳細",
-        "開始日",
-        "終了日",
-        "プロジェクト",
-        "優先度",
-        "担当者",
-        "ステータス",
-        "優先度id",
-        "担当者id",
-        "ステータスid"
+        $l.task.column.id,
+        $l.task.column.task,
+        $l.task.column.description,
+        $l.task.column.start,
+        $l.task.column.end,
+        $l.task.column.project,
+        $l.task.column.priority,
+        $l.task.column.owner,
+        $l.task.column.status,
+        $l.task.column.priorityid,
+        $l.task.column.ownerid,
+        $l.task.column.statusid
     ],
     colModel: [
         {
@@ -152,14 +152,13 @@ var task = {
         var st = "#t"+treedata.id;
     },
     ondblClickRow: function(rowid) {
-        /* $("#task").editGridRow(rowid); */
         edit_task(rowid);
     },
     prmNames: {
         page:"page",
         rows:"rows",
-        sort: "task[sort]",
-        order: "task[order]",
+        sort: "sort",
+        order: "order",
         search:"_search",
         nd:"nd",
         id:"id",
@@ -176,8 +175,8 @@ var task = {
 var tasknav = {
     "param": {search: false, view: false},
     "edit": {
-        editCaption: "タスクの編集",
-        bSubmit: "保存",
+        editCaption: $l.task.edit.caption,
+        bSubmit: $l.task.edit.button,
         mtype: 'PUT',
         reloadAfterSubmit:true,
         closeAfterEdit:true,
@@ -238,8 +237,8 @@ var tasknav = {
         }
     },
     "add": {
-        addCaption: "タスクの追加",
-        bSubmit: "登録",
+        addCaption: $l.task.add.caption,
+        bSubmit: $l.task.add.button,
         url: '/tasks',
         reloadAfterSubmit: true,
         closeAfterAdd: true,
@@ -307,9 +306,9 @@ var tasknav = {
         }
     },
     "del": {
-        caption: "削除の確認",
-        msg: "選択したタスクを削除しますか？",
-        bSubmit: "削除",
+        caption: $l.task.delete.caption,
+        msg: $l.task.delete.msg,
+        bSubmit: $l.task.delete.button,
         mtype: "DELETE",
         loadError: function(xhr, st, err) {
             if(xhr.status == 403) {
@@ -333,7 +332,13 @@ var westgrid = {
     url: "/projects",
     datatype: "json",
     height: "auto",
-    colNames: ["id","プロジェクト", "詳細", "開始日", "終了日"],
+    colNames: [
+        $l.project.column.id,
+        $l.project.column.project,
+        $l.project.column.detail,
+        $l.project.column.start,
+        $l.project.column.end
+    ],
     colModel: [
         {
             name: "id",
@@ -394,7 +399,7 @@ var westgrid = {
             sortable: false
         }
     ],
-    caption: "プロジェクト",
+    caption: $l.project.caption,
     hidegrid: false,
     treeGrid: true,
     ExpandColumn: "name",

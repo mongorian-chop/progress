@@ -10,8 +10,8 @@ var version = "0.5";
 var $priorities
 var $users
 var $statuses
-    /* initial data load. */
-    initalize();
+/* initial data load. */
+initalize();
 
 $(document).ready(function () {
 
@@ -32,8 +32,8 @@ $(document).ready(function () {
         $("#start_on").datepicker('option', 'maxDate', null);
         $("#end_on").datepicker('option', 'minDate', null);
         jQuery("#west-grid").editGridRow("new",{
-            addCaption: "プロジェクトの追加",
-            bSubmit: "登録",
+            addCaption: $l.project.add.caption,
+            bSubmit: $l.project.add.button,
             url: '/projects',
             errorTextFormat: function(xhr) {
                 if(xhr.status == 403) {
@@ -92,17 +92,17 @@ $(document).ready(function () {
         var rowid = jQuery("#west-grid").getGridParam('selrow');
         if(rowid != null && rowid != 0) {
             edit_project(rowid);
-            }else{
-                alert_dlg("エラー", "プロジェクトを選択してください");
-            }
+        }else{
+            alert_dlg($l.dialog.error, $l.project.errorMsg);
+        }
     });
     $("#del-project").click(function(){
         var rowid = jQuery("#west-grid").getGridParam('selrow');
         if(rowid != null && rowid != 0) {
             jQuery("#west-grid").delGridRow(rowid, {
-                caption: "削除の確認",
-                msg: "選択したプロジェクトを削除しますか？",
-                bSubmit: "削除",
+                caption: $l.project.delete.caption,
+                msg: $l.project.delete.msg,
+                bSubmit: $l.project.delete.button,
                 url: '/projects/'+rowid,
                 mtype: "DELETE",
                 errorTextFormat: function(xhr) {
@@ -118,18 +118,18 @@ $(document).ready(function () {
                 closeOnEscape: true,
                 closeAfterEdit:true
             })
-            }else{
-                alert_dlg("エラー", "プロジェクトを選択してください");
-            }
+        }else{
+            alert_dlg($l.dialog.error, $l.project.errorMsg);
+        }
     });
     $("#chg-pass").click(function(){
-        change_password("パスワード変更", "ログアウトしますか？");
+        change_password($l.account.changepass, $l.account.changepassmsg);
     });
 
     $("#view-gantt").live('click', toggle_btn);
 
     $("#logout").click(function(){
-        confirm_dlg("確認", "ログアウトしますか？");
+        confirm_dlg($l.account.logout, $l.account.logoutmsg);
     });
     init();
 });
@@ -170,7 +170,7 @@ function gantt_show(rowid, project_name) {
             }
         }
         $("#gantt").gantt({
-            'titles': new Array('タスク'),
+            'titles': new Array($l.gantt.title),
             'defaultRange': 1,
             'tasks': task,
             'from': f,
@@ -268,25 +268,27 @@ function alert_dlg(title, msg) {
 }
 
 function change_password() {
-    h = '<div title="パスワード変更" class="ui-jqdialog-content ui-widget-content" id="editcntwest-grid"><span><form style="overflow: auto; width: 100%; position: relative; height: auto;" class="FormGrid" id="FrmGrid_change_password" name="FormPost"><table cellspacing="0" border="0" cellpading="0" class="EditTable" id="TblGrid_west-grid"><tbody><tr style="display: none;" id="FormError"><td colspan="2" class="ui-state-error"/></tr><tr rowpos="1" class="FormData" id="tr_password"><td class="CaptionTD ui-widget-content">パスワード</td><td style="white-space: pre;" class="DataTD ui-widget-content"> <input type="password" size="12" id="password" name="password" class="FormElement"/></td></tr><tr rowpos="1" class="FormData" id="tr_password_confirmation"><td class="CaptionTD ui-widget-content">パスワード（確認）</td><td style="white-space: pre;" class="DataTD ui-widget-content"> <input type="password" size="12" id="password_confirmation" name="password_confirmation" class="FormElement"/></td></tr></tbody></table></form></span></div>';
+    h = '<div title="'+$l.dialog.password.title+'" class="ui-jqdialog-content ui-widget-content" id="editcntwest-grid"><span><form style="overflow: auto; width: 100%; position: relative; height: auto;" class="FormGrid" id="FrmGrid_change_password" name="FormPost"><table cellspacing="0" border="0" cellpading="0" class="EditTable" id="TblGrid_west-grid"><tbody><tr style="display: none;" id="FormError"><td colspan="2" class="ui-state-error"/></tr><tr rowpos="1" class="FormData" id="tr_password"><td class="CaptionTD ui-widget-content">'+$l.dialog.password.password1+'</td><td style="white-space: pre;" class="DataTD ui-widget-content"> <input type="password" size="12" id="password" name="password" class="FormElement"/></td></tr><tr rowpos="1" class="FormData" id="tr_password_confirmation"><td class="CaptionTD ui-widget-content">'+$l.dialog.password.password1+'</td><td style="white-space: pre;" class="DataTD ui-widget-content"> <input type="password" size="12" id="password_confirmation" name="password_confirmation" class="FormElement"/></td></tr></tbody></table></form></span></div>';
 
     function checkLength(o, n, min, max) {
         if(o.val().length > max || o.val().length < min ) {
-            appendErr(min+"文字以上、"+max+"文字以内で入力してください");
+            msg = $l.validate.range.replace(/\{1\}/, min);
+            msg = msg.replace(/\{2\}/, max);
+            appendErr(msg);
             return false;
         }
         return true;
     }
     function checkRegexp(o, regexp, n) {
         if(!(regexp.test(o.val()))) {
-            appendErr("英数字のみ使用してください");
+            appendErr($l.validate.alphanum);
             return false;
         }
         return true;
     }
     function checkCompare(o, n) {
         if(o.val() != n.val()) {
-            appendErr("パスワード不一致");
+            appendErr($l.validate.unmatch);
             return false;
         }
         return true;
@@ -306,16 +308,16 @@ function change_password() {
             opacity: 0.5
         },
         buttons: {
-            'キャンセル': function() {
+            cancel: function() {
                 $(this).dialog('close');
             },
-            '変更する': function() {
+            edit: function() {
                 $("#FormError").css('display', 'none');
                 var bvalid = true;
                 password = $("#password");
                 password_confirmation = $("#password_confirmation");
-                bvalid = bvalid && checkLength(password, "パスワード",3,20);
-                bvalid = bvalid && checkLength(password_confirmation, "パスワード（確認）",3,20);
+                bvalid = bvalid && checkLength(password, $l.dialog.password.password1,3,20);
+                bvalid = bvalid && checkLength(password_confirmation, $l.dialog.password.password2,3,20);
 
                 bvalid = bvalid && checkRegexp(password,/^([0-9a-za-z])+$/);
                 bvalid = bvalid && checkRegexp(password_confirmation,/^([0-9a-za-z])+$/);
@@ -334,7 +336,7 @@ function change_password() {
                         data: d,
                         success: function(msg) {
                             if(msg == "false") {
-                                appendErr("パスワードの変更に失敗しました");
+                                appendErr($l.dialog.password.error);
                             }else{
                                 f.dialog("close");
                             }
@@ -396,8 +398,8 @@ function edit_task(rowid) {
 
 function edit_project (rowid) {
     jQuery("#west-grid").editGridRow(rowid, {
-        editCaption: "プロジェクトの編集",
-        bSubmit: "保存",
+        editCaption: $l.project.edit.caption,
+        bSubmit: $l.project.edit.button,
         url: '/projects/'+rowid,
         mtype: "PUT",
         errorTextFormat: function(xhr) {
@@ -459,11 +461,6 @@ function decode(data, id) {
 }
 
 function initalize() {
-    /*
-    getPriorities();
-    getUsers();
-    getStatuses();
-    */
     getList('priorities');
     getList('users');
     getList('statuses');
