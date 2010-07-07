@@ -7,4 +7,9 @@ class Plan < ActiveRecord::Base
   validates_length_of :name, :maximum => 255
   validates_numericality_of :max, :less_than_or_equal_to => 65535
   validates_numericality_of :price
+
+  def localize
+    self.name = I18n.t(self.class.name.downcase + '.' + self.name)
+    self
+  end
 end

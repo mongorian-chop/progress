@@ -3,11 +3,11 @@ class PlansController < ApplicationController
   before_filter :find_plan, :only => [:show, :update, :destroy]
 
   def index
-    render :json => Plan.all.map(&:attributes)
+    render :json => Plan.all.map {|o| o.localize.attributes }
   end
 
   def show
-    render :json => @plan.attributes
+    render :json => @plan.localize.attributes
   end
 
   def create

@@ -10,7 +10,7 @@ class TasksController < ApplicationController
   end
 
   def show
-    render :json => Task.localize(@task.attributes)
+    render :json => @task.localize.attributes
   end
 
   def create

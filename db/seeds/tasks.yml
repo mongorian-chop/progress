@@ -1,5 +1,5 @@
 <% $I = 0; def increment; $I += 1 end %>
-<% 20.times do |n| %>
+<% 40.times do |n| %>
 task_<%= increment %>:
   id: <%= $I %>
   name: "タスク<%= $I %>"

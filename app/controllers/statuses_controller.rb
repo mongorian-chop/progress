@@ -3,11 +3,11 @@ class StatusesController < ApplicationController
   before_filter :find_status, :only => [:show, :update, :destroy]
 
   def index
-    render :json => Status.all.map(&:attributes)
+    render :json => Status.all.map {|o| o.localize.attributes }
   end
 
   def show
-    render :json => @status.attributes
+    render :json => @status.localize.attributes
   end
 
   def create

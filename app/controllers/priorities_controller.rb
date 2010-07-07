@@ -3,11 +3,11 @@ class PrioritiesController < ApplicationController
   before_filter :find_priority, :only => [:show, :update, :destroy]
 
   def index
-    render :json => Priority.all.map(&:attributes)
+    render :json => Priority.all.map {|o| o.localize.attributes }
   end
 
   def show
-    render :json => @priority.attributes
+    render :json => @priority.localize.attributes
   end
 
   def create
