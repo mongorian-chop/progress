@@ -188,7 +188,7 @@ var tasknav = {
             }
         },
         beforeInitData: function() {
-            get_init_data3("/projects", "project_id");
+            get_init_data("/projects", "project_id");
         },
         afterShowForm: function(){
             jQuery("#start_on").datepicker({
@@ -251,7 +251,7 @@ var tasknav = {
             }
         },
         beforeInitData: function() {
-            get_init_data3("/projects", "project_id");
+            get_init_data("/projects", "project_id");
 
         },
         onclickSubmit: function(params, data){
@@ -347,7 +347,7 @@ var westgrid = {
             editrules: {
                 required: true
             },
-            width:150,
+            width:232,
             resizable: false,
             sortable:false
         },{

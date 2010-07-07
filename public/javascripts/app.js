@@ -362,7 +362,7 @@ function pickdates(id){
 
 function init() {
     get_init_data("/priorities",   "priority_id");
-    get_init_data2("/users",            "user_id");
+    get_init_data("/users",            "user_id");
     get_init_data("/statuses",       "status_id");
 }
 
@@ -376,46 +376,14 @@ function get_init_data(url, data) {
         label: data,
         success: function(obj){
             opt = "";
-            for(var i=0; i<obj.length; i++) {
-                opt += obj[i].id+":"+obj[i].name;
-                if(i+1 < obj.length) opt +=";";
-            }
-            $("#task").setColProp(this.label, {editoptions: {value:opt}});
-        }
-    });
-}
-function get_init_data2(url, data) {
-    var label = data;
-    $.ajax({
-        type: "GET",
-        url: url,
-        dataType: "json",
-        async: false,
-        label: data,
-        success: function(obj){
-            opt = "";
-            for(var i=0; i<obj.length; i++) {
-                opt += obj[i].id+":"+obj[i].last_name+" "+obj[i].first_name;
-                if(i+1 < obj.length) opt +=";";
-            }
-            $("#task").setColProp(this.label, {editoptions: {value:opt}});
-        }
-    });
-}
-function get_init_data3(url, data) {
-    var label = data;
-    $.ajax({
-        type: "GET",
-        url: url,
-        dataType: "json",
-        async: false,
-        label: data,
-        success: function(o){
-            opt = "";
-            obj = o["rows"];
-            for(var i=0; i<obj.length; i++) {
-                opt += obj[i].id+":"+obj[i].name;
-                if(i+1 < obj.length) opt +=";";
+            o = (obj["rows"]) ? obj["rows"] : obj
+            for(var i=0; i<o.length; i++) {
+                if(o[i].name === undefined) {
+                    opt += o[i].id+":"+o[i].last_name+" "+o[i].first_name;
+                }else{
+                    opt += o[i].id+":"+o[i].name;
+                }
+                if(i+1 < o.length) opt +=";";
             }
             $("#task").setColProp(this.label, {editoptions: {value:opt}});
         }
