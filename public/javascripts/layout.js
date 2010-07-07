@@ -14,17 +14,17 @@ var layoutSettings = {
     },
     west: {
         size:                   250,
+        spacing_open:           15,
         spacing_closed:         15,
-        togglerLength_closed:   15,
-        togglerAlign_closed:    "top",
-        togglerLength_open:     0,
+        togglerLength_open:     17,
+        togglerLength_closed:   17,
         togglerTip_open:        "閉じる",
         togglerTip_closed:      "開く",
         resizerTip_open:        "サイズを変更",
-        slideTrigger_open:      "click",
-        initClosed:             false,
-        closable:               false,
-        fxSettings_open:        { easing: "easeOutBounce" },
+        slideTrigger_open:      "dblclick",
+        togglerAlign_open:      "top",
+        togglerAlign_closed:    "top",
+        initClosed:             true,
         onresize: function (pane, $Pane) {
             sh = $(".ui-layout-west").attr("scrollHeight");
             ch = $(".ui-layout-west").attr("clientHeight");

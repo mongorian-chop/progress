@@ -139,8 +139,10 @@ var task = {
     },
     autowidth: true,
     pager: '#tasknav',
-    rowNum: 20,
-    viewrecords: true,
+    viewrecords: false,
+    pgbuttons: false,
+    pginput: false,
+    rowNum: 2000,
     caption: "&nbsp;",
     hidegrid: false,
     caption: "ALL",
@@ -156,8 +158,8 @@ var task = {
     prmNames: {
         page:"page",
         rows:"rows",
-        sort: "sort",
-        order: "order",
+        sort: "task[sort]",
+        order: "task[order]",
         search:"_search",
         nd:"nd",
         id:"id",
@@ -172,7 +174,7 @@ var task = {
 }
 
 var tasknav = {
-    "search": {search: true, view: true},
+    "param": {search: false, view: false},
     "edit": {
         editCaption: "タスクの編集",
         bSubmit: "保存",
@@ -186,7 +188,7 @@ var tasknav = {
             }
         },
         beforeInitData: function() {
-            get_init_data3("/projects", "project_id");
+            get_init_data("/projects", "project_id");
         },
         afterShowForm: function(){
             jQuery("#start_on").datepicker({
@@ -249,7 +251,7 @@ var tasknav = {
             }
         },
         beforeInitData: function() {
-            get_init_data3("/projects", "project_id");
+            get_init_data("/projects", "project_id");
 
         },
         onclickSubmit: function(params, data){
@@ -345,7 +347,7 @@ var westgrid = {
             editrules: {
                 required: true
             },
-            width:150,
+            width:232,
             resizable: false,
             sortable:false
         },{
