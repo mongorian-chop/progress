@@ -1,2 +1,124 @@
 en:
-  hello: "Hello world"
+  activerecord:
+    models:
+      priority: Priority
+      plan: Plan
+      project: Project
+      status: Status
+      task: Task
+      team: Team
+      user: User
+      user_session: User Session
+
+    attributes: 
+      priority:
+        name: Name
+
+      status: 
+        name: Name
+
+      plan: 
+        name: Name
+        max: Max user
+        price: Price
+
+      team: 
+        name: Team name
+        plan: Plan
+        created_at: Created at
+        updated_at: Updated at
+
+      user: 
+        login: Account
+        email: Email
+        password: Password
+        password_confirmation: Password confirmation 
+        crypted_password: Crypted password
+        password_salt: Password salt
+        persistence_token: Persistence token
+
+        team: Team
+        first_name: First name
+        last_name: Last name
+        first_name_ruby: First name ruby
+        last_name_ruby: Last name ruby
+        company: Company
+        unit: Unit
+        phone_number: Phone number
+        admin: Admin
+
+      project: 
+        name: Project name
+        description: Description
+        start_on: Start on
+        end_on: End on
+        created_at: Created at
+        updated_at: Updated at
+
+      task: 
+        name: Task name
+        description: Description
+        start_on: Start on
+        end_on: End on
+        user: "REP."
+        project: Project
+        priority: Priority
+        status: Status
+        created_at: Created at
+        updated_at: Updated at
+
+      user_session: 
+        login: Account
+        password: Password
+
+  application:
+    title: Progress Gantt Chart
+    description: Easy Gantt Chart
+    keywords: Gantt,Project managiment,free
+
+  Account: Account
+  Login: Login
+  Logout: Logout
+  Signup: Signup
+  Create: Create
+  Delete: Delete
+  Edit: Edit
+  Update: Update
+  Add: Add
+  Cancel: Cancel
+  Comment was successfully created: "Comment was successfully created."
+  Comment was successfully updated: "Comment was successfully updated."
+  Comment was successfully deleted: "Comment was successfully deleted."
+  Comment was not deleted: "Comment was not deleted."
+  Comment is nothing: "Comment is nothing."
+  Logged in successfully: "Logged in successfully."
+  Logged in failed: "Logged in failed."
+  You have been logged out: You have been logged out
+  Login required: "Login required."
+  Logout required: "Logout required."
+  Signup successfully: "Signup successfully."
+  Please select: "--- Please select ---"
+  Now loading: "Now loading..."
+  Change password: Change password
+  Gantt view: Gantt view
+  Task view: Task view
+
+  priority:
+    highest: Highest
+    high: High
+    middle: Middle
+    low: Low
+    lowest: Lowest
+
+  status:
+    idle: Idle
+    active: Active
+    terminate: Terminate
+
+  plan:
+    free: Free
+    wood: Wood
+    bronze: Bronze
+    silver: Silver
+    gold: Gold
+    platinum: Platinum

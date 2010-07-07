@@ -247,7 +247,7 @@ ja:
 
   status:
     idle: 未着手
-    avtive: 作業中
+    active: 作業中
     terminate: 完了
 
   plan:
