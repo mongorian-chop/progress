@@ -139,8 +139,10 @@ var task = {
     },
     autowidth: true,
     pager: '#tasknav',
-    rowNum: 20,
-    viewrecords: true,
+    viewrecords: false,
+    pgbuttons: false,
+    pginput: false,
+    rowNum: 2000,
     caption: "&nbsp;",
     hidegrid: false,
     caption: "ALL",
@@ -156,8 +158,8 @@ var task = {
     prmNames: {
         page:"page",
         rows:"rows",
-        sort: "sort",
-        order: "order",
+        sort: "task[sort]",
+        order: "task[order]",
         search:"_search",
         nd:"nd",
         id:"id",
@@ -172,7 +174,7 @@ var task = {
 }
 
 var tasknav = {
-    "search": {search: true, view: true},
+    "param": {search: false, view: false},
     "edit": {
         editCaption: "タスクの編集",
         bSubmit: "保存",

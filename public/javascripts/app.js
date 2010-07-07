@@ -20,7 +20,7 @@ $(document).ready(function () {
     outerLayout = $('body').layout(layoutSettings);
 
     /* タスクGrid */
-    $("#task").jqGrid(task).navGrid('#tasknav', tasknav.search, tasknav.edit, tasknav.add, tasknav.del, tasknav.search);
+    $("#task").jqGrid(task).navGrid('#tasknav', tasknav.param, tasknav.edit, tasknav.add, tasknav.del);
 
     /* プロジェクトツリー */
     $("#west-grid").jqGrid(westgrid);
@@ -423,68 +423,7 @@ function get_init_data3(url, data) {
 }
 
 function edit_task(rowid) {
-    jQuery("#task").editGridRow(rowid, {
-        editCaption: "タスクの編集",
-        bSubmit: "保存",
-        url: '/tasks/'+rowid,
-        mtype: 'PUT',
-        reloadAfterSubmit:true,
-        closeAfterEdit:true,
-        closeOnEscape: true,
-        loadError: function(xhr, st, err) {
-            if(xhr.status == 403) {
-                logout();
-            }
-        },
-        beforeInitData: function() {
-            get_init_data3("/projects", "project_id");
-        },
-        afterShowForm: function(){
-            jQuery("#start_on").datepicker({
-                showButtonPanel: true,
-                showOn: 'both',
-                buttonImage: '/images/icons/calendar.png',
-                buttonImageOnly: true,
-                numberOfMonths: 3,
-                beforeShow: function() {
-                    e = $("#end_on").val();
-                    sp = e.split("/");
-                    $("#start_on").datepicker('option', 'maxDate', new Date(parseInt(sp[0]),parseInt(sp[1])-1,parseInt(sp[2])-1));
-                }
-            });
-            jQuery("#end_on").datepicker({
-                showButtonPanel: true,
-                showOn: 'both',
-                buttonImage: '/images/icons/calendar.png',
-                buttonImageOnly: true,
-                numberOfMonths: 3,
-                beforeShow: function() {
-                    e = $("#end_on").val();
-                    sp = e.split("/");
-                    $("#start_on").datepicker('option', 'maxDate', new Date(parseInt(sp[0]),parseInt(sp[1])-1,parseInt(sp[2])-1));
-                }
-            });
-        },
-        onclickSubmit: function(params, data){
-            return {
-                'oper': "",
-                'task[id]': data.id,
-                'task[name]': data.name,
-                'task[description]': data.description,
-                'task[start_on]': data.start_on,
-                'task[end_on]': data.end_on,
-                'task[project_id]': data.project_id,
-                'task[priority_id]': data.priority_id,
-                'task[user_id]': data.user_id,
-                'task[status_id]': data.status_id
-            };
-        },
-        afterSubmit: function(res, data) {
-            jQuery("#west-grid").setGridParam({url:"/projects"})
-                .trigger("reloadGrid");
-                return true;
-        }
-    });
+    jQuery("#task").editGridRow(rowid, tasknav.edit);
 }
 
 function edit_project (rowid) {
@@ -552,46 +491,27 @@ function decode(data, id) {
 }
 
 function initalize() {
+    /*
     getPriorities();
     getUsers();
     getStatuses();
+    */
+    getList('priorities');
+    getList('users');
+    getList('statuses');
 }
 
-function getPriorities() {
+function getList(t) {
+    u = "/"+t;
+    d = "$"+t;
     $.ajax({
-        url: '/priorities',
+        url: u,
         type: 'GET',
         dataType: 'json',
         async: false,
         success: function(data, sts, req){
             if(sts == "success") {
-                $priorities = data;
-            }
-        }
-    });
-}
-function getUsers() {
-    $.ajax({
-        url: '/users',
-        type: 'GET',
-        dataType: 'json',
-        async: false,
-        success: function(data, sts, req){
-            if(sts == "success") {
-                $users = data;
-            }
-        }
-    });
-}
-function getStatuses() {
-    $.ajax({
-        url: '/statuses',
-        type: 'GET',
-        dataType: 'json',
-        async: false,
-        success: function(data, sts, req){
-            if(sts == "success") {
-                $statuses = data;
+                eval(d+" = data");
             }
         }
     });
