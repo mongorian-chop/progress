@@ -193,7 +193,12 @@ ul.toolbar li a:hover {
     padding:0;
     border: none;
 }
-
+.ui-layout-toggler-open {
+    background:url("/images/go-lt-on.gif") no-repeat scroll center center transparent;
+}
+.ui-layout-toggler-closed {
+    background:url("/images/go-rt-off.gif") no-repeat scroll center center transparent;
+}
 .ui-layout-west,
 .ui-layout-center {
     border:1px solid;
