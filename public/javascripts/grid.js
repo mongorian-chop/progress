@@ -216,7 +216,7 @@ var tasknav = {
             });
         },
         onclickSubmit: function(params, data){
-            this.url = "/tasks/"+data.id;
+            this.url = "/tasks/"+data.task_id;
             return {
                 'oper': "",
                 'task[id]': data.id,
