@@ -15,8 +15,7 @@
     = stylesheet_link_tag 'http://ajax.googleapis.com/ajax/libs/jqueryui/1.7.2/themes/flick/jquery-ui', :media => 'screen'
     = javascript_include_tag 'libs/jquery.layout.min'
     = javascript_include_tag "i18n/locale.default-#{I18n.locale}"
-    = javascript_include_tag 'libs/jquery.gantt'
-    = javascript_include_tag 'gantt'
+    = stylesheet_link_tag 'jsgantt', :media => 'screen'
     = stylesheet_link_tag 'ui.jqgrid', :media => 'screen'
     = javascript_include_tag 'libs/grid.locale-jp'
     = javascript_include_tag 'libs/jquery.jqGrid.min'
@@ -24,4 +23,6 @@
     = javascript_include_tag 'app.js'
     = javascript_include_tag 'layout.js'
     = javascript_include_tag 'grid.js'
+    = javascript_include_tag 'libs/jsgantt'
+    = javascript_include_tag 'gantt'
   %body= yield

@@ -6,7 +6,7 @@ var version = "0.5";
 /**
  * application start.
  */
-
+var g;
 var $priorities
 var $users
 var $statuses
@@ -146,6 +146,15 @@ function gantt_show(rowid, project_name) {
         task = new Array;
         f = "";
         t = "";
+
+        g = new JSGantt.GanttChart('g','gantt', 'day');
+
+        g.setShowRes(1);
+        g.setShowDur(1);
+        g.setShowComp(1);
+        g.setCaptionType('Resource');
+
+
         for(i=0,l=json.rows.length; i < l; i++) {
             d = json.rows[i];
             s = d["start_on"].replace(/-/g, "");
@@ -168,7 +177,13 @@ function gantt_show(rowid, project_name) {
             if(!t || t < e) {
                 t = e;
             }
+
+            g.AddTaskItem(new JSGantt.TaskItem(d.id, d.name, d["start_on"], d["end_on"], 'ff0000', '', 0,'a', 0,1,0,1));
         }
+        g.Draw();
+        g.DrawDependencies();
+
+        /*
         $("#gantt").gantt({
             'titles': new Array($l.gantt.title),
             'defaultRange': 1,
@@ -176,6 +191,7 @@ function gantt_show(rowid, project_name) {
             'from': f,
             'to': t
         });
+        */
     });
     $("#gantt_view span.ui-jqgrid-title").text(project_name);
     $("#ganttnav #prev").click(function() {
