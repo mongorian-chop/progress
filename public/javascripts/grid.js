@@ -216,7 +216,7 @@ var tasknav = {
             });
         },
         onclickSubmit: function(params, data){
-            this.url = "/tasks/"+data.id;
+            this.url = "/tasks/"+data.task_id;
             return {
                 'oper': "",
                 'task[id]': data.id,
@@ -332,6 +332,7 @@ var westgrid = {
     url: "/projects",
     datatype: "json",
     height: "auto",
+    loadui: "disable",
     colNames: [
         $l.project.column.id,
         $l.project.column.project,
