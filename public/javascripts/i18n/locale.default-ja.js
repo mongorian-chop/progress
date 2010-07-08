@@ -55,7 +55,7 @@ Language = {
             project: "\u30d7\u30ed\u30b8\u30a7\u30af\u30c8",
             priority: "\u512a\u5148\u5ea6",
             owner: "\u62c5\u5f53\u8005",
-            status: "\u30b9\u30c6\u30fc\u30bf\u30b9"
+            status: "\u30b9\u30c6\u30fc\u30bf\u30b9",
             priorityid: "\u512a\u5148\u5ea6",
             ownerid: "\u62c5\u5f53\u8005",
             statusid: "\u30b9\u30c6\u30fc\u30bf\u30b9"
