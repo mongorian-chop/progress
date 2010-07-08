@@ -209,9 +209,9 @@ var tasknav = {
                 buttonImageOnly: true,
                 numberOfMonths: 3,
                 beforeShow: function() {
-                    e = $("#end_on").val();
-                    sp = e.split("/");
-                    $("#start_on").datepicker('option', 'maxDate', new Date(parseInt(sp[0]),parseInt(sp[1])-1,parseInt(sp[2])-1));
+                    s = $("#start_on").val();
+                    sp = s.split("/");
+                    $("#end_on").datepicker('option', 'minDate', new Date(parseInt(sp[0]),parseInt(sp[1])-1,parseInt(sp[2])+1));
                 }
             });
         },
