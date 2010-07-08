@@ -2,9 +2,9 @@ idle:
   id: 1
   name: idle
 
-avtive:
+active:
   id: 2
-  name: avtive
+  name: active
 
 terminate:
   id: 3

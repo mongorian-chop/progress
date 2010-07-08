@@ -6,6 +6,8 @@ gem 'haml', '3.0.13'
 gem 'pacecar', '1.3.0'
 gem 'authlogic', '2.1.5'
 gem 'will_paginate', '2.3.14'
+gem 'locale', '2.0.5'
+gem 'locale_rails', '2.0.6', :git => 'git://github.com/mutoh/locale_rails.git'
 
 group :production do
   gem 'pg', '0.9.0'
