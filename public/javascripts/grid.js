@@ -332,7 +332,6 @@ var westgrid = {
     url: "/projects",
     datatype: "json",
     height: "auto",
-    loadui: "disable",
     colNames: [
         $l.project.column.id,
         $l.project.column.project,
