@@ -147,51 +147,43 @@ function gantt_show(rowid, project_name) {
         f = "";
         t = "";
 
-        g = new JSGantt.GanttChart('g','gantt', 'day');
-
-        g.setShowRes(1);
-        g.setShowDur(1);
-        g.setShowComp(1);
-        g.setCaptionType('Resource');
-
-
         for(i=0,l=json.rows.length; i < l; i++) {
             d = json.rows[i];
             s = d["start_on"].replace(/-/g, "");
             e = d["end_on"].replace(/-/g, "");
+            /*
             pr = decode($priorities, d["priority_id"]);
             us = decode($users, d["user_id"]);
             st = decode($statuses, d["status_id"]);
+            */
             c = {
-                'titles': d["name"],
-                'start_date': s,
-                'end_date': e,
-                'priority': pr,
-                'user': us,
-                'status': st
+                id: d["id"],
+                name: d["name"],
+                series: [
+                    {
+                        name: d["last_name"],
+                        start: Date.parseExact(d["start_on"], "yyyy-M-d"),
+                        end: Date.parseExact(d["end_on"], "yyyy-M-d")
+                    }
+                ]
             };
             task.push(c);
             if(!f || f > s) {
                 f = s;
+                from = d["start_on"];
             }
             if(!t || t < e) {
                 t = e;
+                to = d["end_on"];
             }
 
-            g.AddTaskItem(new JSGantt.TaskItem(d.id, d.name, d["start_on"], d["end_on"], 'ff0000', '', 0,'a', 0,1,0,1));
         }
-        g.Draw();
-        g.DrawDependencies();
-
-        /*
-        $("#gantt").gantt({
-            'titles': new Array($l.gantt.title),
-            'defaultRange': 1,
-            'tasks': task,
-            'from': f,
-            'to': t
+        $("#gantt_view").ganttView({
+            data: task,
+            start: Date.parseExact(from, "yyyy-M-d"),
+            end: Date.parseExact(to, "yyyy-M-d"),
+            slideWidth: 900
         });
-        */
     });
     $("#gantt_view span.ui-jqgrid-title").text(project_name);
     $("#ganttnav #prev").click(function() {
