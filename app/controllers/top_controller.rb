@@ -4,4 +4,7 @@ class TopController < ApplicationController
 
   def index
   end
+
+  def gantt
+  end
 end

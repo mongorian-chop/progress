@@ -5,6 +5,12 @@ class CreateUsers < ActiveRecord::Migration
       t.string     :crypted_password
       t.string     :password_salt
       t.string     :persistence_token
+      t.integer    :login_count, :default => 0, :null => false
+      t.datetime   :last_request_at
+      t.datetime   :last_login_at
+      t.datetime   :current_login_at
+      t.string     :last_login_ip
+      t.string     :current_login_ip
 
       t.belongs_to :team, :null => false
       t.string     :first_name, :null => false, :limit => 16
