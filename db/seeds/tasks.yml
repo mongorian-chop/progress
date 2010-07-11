@@ -6,6 +6,7 @@ task_<%= increment %>:
   description: "タスク<%= $I %>の詳細"
   start_on: 2010-06-01
   days: 5
+  progress: 30
   project_id: 1
   priority_id: 1
   status_id: 1

@@ -5,6 +5,7 @@ class CreateTasks < ActiveRecord::Migration
       t.string     :description, :limit => 255
       t.date       :start_on, :null => false
       t.integer    :days, :null => false, :default => 1
+      t.integer    :progress, :null => false, :default => 0, :limit => 100
       t.belongs_to :user
       t.belongs_to :project, :null => false
       t.belongs_to :priority
