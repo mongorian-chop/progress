@@ -75,10 +75,10 @@ var task = {
             width: 100
         },{
             name: "end_on",
-            editable: true,
+            editable: false,
             editoptions: { size:12 },
             formatter:'date',
-            editrules: { required: true, },
+            editrules: { required: false, },
             width:150,
             align: "center",
             resizable: false,

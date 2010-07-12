@@ -63,7 +63,7 @@ div.ganttview-vtheader-item {
 }
 
 div.ganttview-vtheader-item-name {
-	width: 100px;
+	width: 100%;
 	padding-left: 5px;
 	border-top: 1px solid #d0d0d0;
 	line-height: 16px;

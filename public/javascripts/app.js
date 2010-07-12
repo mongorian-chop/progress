@@ -147,6 +147,7 @@ function gantt_show(rowid, project_name) {
         f = "";
         t = "";
 
+        $(".ganttview").remove();
         if(json.rows.length > 0) {
             for(i=0,l=json.rows.length; i < l; i++) {
                 d = json.rows[i];
@@ -182,8 +183,10 @@ function gantt_show(rowid, project_name) {
                 start: Date.parseExact(from, "yyyy-M-d").addDays(-14),
                 end: Date.parseExact(to, "yyyy-M-d").addDays(14),
                 slideWidth: 900,
+                itemClick: function(o) {
+                    edit_task(o.id);
+                },
                 change: function(o, s, m) {
-                    console.log(o,s,m);
                 }
             });
         }
