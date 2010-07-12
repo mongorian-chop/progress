@@ -147,47 +147,46 @@ function gantt_show(rowid, project_name) {
         f = "";
         t = "";
 
-        for(i=0,l=json.rows.length; i < l; i++) {
-            d = json.rows[i];
-            s = d["start_on"].replace(/-/g, "");
-            e = d["end_on"].replace(/-/g, "");
-            /*
-            pr = decode($priorities, d["priority_id"]);
-            us = decode($users, d["user_id"]);
-            st = decode($statuses, d["status_id"]);
-            */
-            color = d["status_id"]
-            c = {
-                id: d["id"],
-                name: d["name"],
-                series: [
-                    {
-                        name: d["last_name"],
-                        start: Date.parseExact(d["start_on"], "yyyy-M-d"),
-                        end: Date.parseExact(d["end_on"], "yyyy-M-d")
-                    }
-                ]
-            };
-            task.push(c);
-            if(!f || f > s) {
-                f = s;
-                from = d["start_on"];
-            }
-            if(!t || t < e) {
-                t = e;
-                to = d["end_on"];
-            }
+        if(json.rows.length > 0) {
+            for(i=0,l=json.rows.length; i < l; i++) {
+                d = json.rows[i];
+                s = d["start_on"].replace(/-/g, "");
+                e = Date.parse(d["start_on"]).addDays(d["days"]).toString("yyyyMMdd");
+                end_on = Date.parse(d["start_on"]).addDays(d["days"]).toString("yyyy-MM-dd");
+                /*
+                pr = decode($priorities, d["priority_id"]);
+                us = decode($users, d["user_id"]);
+                st = decode($statuses, d["status_id"]);
+                */
+                color = d["status_id"]
+                c = {
+                    id: d["id"],
+                    name: d["name"],
+                    start: Date.parseExact(d["start_on"], "yyyy-M-d"),
+                    days: d["days"]
+                };
+                task.push(c);
+                if(!f || f > s) {
+                    f = s;
+                    from = d["start_on"];
+                }
+                if(!t || t < e) {
+                    t = e;
+                    to = end_on;
+                }
 
-        }
-        $("#gantt_view").ganttView({
-            data: task,
-            start: Date.parseExact(from, "yyyy-M-d"),
-            end: Date.parseExact(to, "yyyy-M-d"),
-            slideWidth: 900,
-            change: function(o, s, m) {
-                console.log(o,s,m);
             }
-        });
+            $("#gantt_view").ganttView({
+                data: task,
+                cellWidth: 21,
+                start: Date.parseExact(from, "yyyy-M-d").addDays(-14),
+                end: Date.parseExact(to, "yyyy-M-d").addDays(14),
+                slideWidth: 900,
+                change: function(o, s, m) {
+                    console.log(o,s,m);
+                }
+            });
+        }
     });
     $("#gantt_view span.ui-jqgrid-title").text(project_name);
     $("#ganttnav #prev").click(function() {
