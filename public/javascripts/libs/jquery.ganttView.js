@@ -30,7 +30,8 @@ var ChartLang = {
             cellHeight: 21,
             slideWidth: 400,
             vHeaderWidth: 100,
-            blockClick: null
+            blockClick: null,
+            change: null
         };
         var opts = jQuery.extend(defaults, options);
         var months = Chart.getMonths(opts.start, opts.end);
@@ -50,7 +51,7 @@ var ChartLang = {
             Chart.addHzHeader(slideDiv, months, opts.cellWidth);
             Chart.addGrid(slideDiv, opts.data, months, opts.cellWidth, opts.showWeekends);
             Chart.addBlockContainers(slideDiv, opts.data);
-            Chart.addBlocks(slideDiv, opts.data, opts.cellWidth, opts.start, opts.cellWidth);
+            Chart.addBlocks(slideDiv, opts.data, opts.cellWidth, opts.start, opts.change);
 
             div.append(slideDiv);
             container.append(div);
@@ -159,7 +160,7 @@ var ChartLang = {
             div.append(blocksDiv);
         },
 
-        addBlocks: function (div, data, cellWidth, start, cellWidth) {
+        addBlocks: function (div, data, cellWidth, start, change) {
             var rows = jQuery("div.ganttview-blocks div.ganttview-block-container", div);
             var rowIdx = 0;
             for (var i = 0; i < data.length; i++) {
@@ -201,16 +202,27 @@ var ChartLang = {
                             var s = blockDiv.data('block-data').start.clone().addDays(distance)
                             var e = blockDiv.data('block-data').end.clone().addDays(distance)
                             console.debug('distance: %o, start: %o, end: %o', distance, s, e)
+
+                            if(change !== null) {
+                                m = $(this).css("margin-left").replace(/px/, "");
+                                n = parseInt(m)+parseInt(ui.position.left);
+                                $(this).css("margin-left", n+"px");
+                                $(this).css("left", "0px");
+                                ui.position.left=0;
+
+                                change(blockDiv, s, distance);
+                            }
                           }
                         }).resizable({
                           containment: 'parent',
                           grid: [cellWidth, 0],
                           handles: 'e',
                           stop: function(event, ui) {
-                            var rdistance = Math.ceil(ui.size.width / 21)
+                            var rdistance = Math.ceil(ui.size.width / cellWidth)
                             var rs = blockDiv.data('block-data').start.clone().addDays(rdistance)
                             var re = blockDiv.data('block-data').end.clone().addDays(rdistance)
                             console.debug('width: %o, originalSize: %o, day: %o', ui.size.width, ui.originalSize.width, rdistance)
+                            if(change !== null) change(blockDiv, rs, rdistance);
                           }
                         })
                         jQuery(rows[rowIdx]).append(blockDiv);

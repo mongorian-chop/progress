@@ -156,6 +156,7 @@ function gantt_show(rowid, project_name) {
             us = decode($users, d["user_id"]);
             st = decode($statuses, d["status_id"]);
             */
+            color = d["status_id"]
             c = {
                 id: d["id"],
                 name: d["name"],
@@ -182,7 +183,10 @@ function gantt_show(rowid, project_name) {
             data: task,
             start: Date.parseExact(from, "yyyy-M-d"),
             end: Date.parseExact(to, "yyyy-M-d"),
-            slideWidth: 900
+            slideWidth: 900,
+            change: function(o, s, m) {
+                console.log(o,s,m);
+            }
         });
     });
     $("#gantt_view span.ui-jqgrid-title").text(project_name);
