@@ -89,7 +89,7 @@ var ChartLang = {
       var headerDiv = jQuery("<div>", { "class": "ganttview-vtheader" })
       for (var i = 0; i < data.length; i++) {
         var itemDiv = jQuery("<div>", {
-          "class": "ganttview-vtheader-item"
+          "class": "ganttview-vtheader-item index"+i
         })
         var itemNameDiv = jQuery("<div>", {
           "class": "ganttview-vtheader-item-name",
@@ -150,7 +150,7 @@ var ChartLang = {
     addBlockContainers: function (div, data) {
       var blocksDiv = jQuery("<div>", { "class": "ganttview-blocks" })
       for (var i = 0; i < data.length; i++) {
-        blocksDiv.append(jQuery("<div>", { "class": "ganttview-block-container" }))
+        blocksDiv.append(jQuery("<div>", { "class": "ganttview-block-container index"+i }))
       }
       div.append(blocksDiv)
     },
@@ -213,6 +213,8 @@ var ChartLang = {
         stop: function(event, ui) {
           distance = ui.position.left / cellWidth
           s = $(o).data('block-data').start.clone().addDays(distance)
+          e = $(o).data('block-data').end.clone().addDays(distance)
+          console.debug('distance: %o, start: %o, end: %o', distance, s, e)
 
           days = $(o).data('block-data').days
           re = DateUtils.resize(s, days, cellWidth);
@@ -237,6 +239,8 @@ var ChartLang = {
           $(o).css("left", "").css("top", "").css("position", "")
           rdistance = Math.ceil(ui.size.width / cellWidth)
           rs = $(o).data('block-data').start.clone().addDays(rdistance)
+          re = $(o).data('block-data').end.clone().addDays(rdistance)
+          console.debug('width: %o, originalSize: %o, day: %o', ui.size.width, ui.originalSize.width, rdistance)
 
           adds = ui.size.width-ui.originalSize.width;
           if(adds>0) {
@@ -265,7 +269,13 @@ var ChartLang = {
 
     bindItemClick: function (div, callback) {
       $(".ganttview-vtheader-item").live("click", function () {
-        if (callback) { callback($(this)) }
+        cls=this.className.split(" ");
+        for(var i=0,len=cls.length; i < len; i++) {
+          if(cls[i].match(/index.*/)) {
+            obj = $("."+cls[i]+" div.ganttview-block").data("block-data");
+          }
+        }
+        if (callback) { callback(obj) }
       })
     }
   }
