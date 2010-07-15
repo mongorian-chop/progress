@@ -1,4 +1,7 @@
 ActionController::Routing::Routes.draw do |map|
+  map.chart_gantt   'gantt',   :controller => 'chart', :action => 'gantt'
+  map.chart_project 'project', :controller => 'chart', :action => 'project'
+  map.chart_user    'user',    :controller => 'chart', :action => 'user'
   map.resources :priorities, :except => [:new, :edit]
   map.resources :statuses, :except => [:new, :edit]
   map.resources :plans, :except => [:new, :edit]
@@ -10,13 +13,12 @@ ActionController::Routing::Routes.draw do |map|
     project.resources :tasks, :except => [:new, :edit]
   end
   map.resources :projects, :has_many => :tasks, :except => [:new, :edit]
-  map.resource :user_session, :only => [:new, :create, :destroy]
-  map.login 'login', :controller => 'user_sessions', :action => 'new'
-  map.logout 'logout', :controller => 'user_sessions', :action => 'destroy'
-  map.signup 'signup', :controller => 'signup', :action => 'new', :conditions => {:method => :get}
-  map.signup 'signup', :controller => 'signup', :action => 'create', :conditions => {:method => :post}
+  map.resource  :user_session, :only => [:new, :create, :destroy]
+  map.login    'login', :controller => 'user_sessions', :action => 'new'
+  map.logout   'logout', :controller => 'user_sessions', :action => 'destroy'
+  map.signup   'signup', :controller => 'signup', :action => 'new', :conditions => {:method => :get}
+  map.signup   'signup', :controller => 'signup', :action => 'create', :conditions => {:method => :post}
   map.messages 'messages/:lang', :controller => 'messages', :action => 'show'
   map.root :controller => 'top'
   map.root_for_yahoo '/index.html', :controller => 'top'
-  map.chart 'chart', :controller => 'top', :action => 'chart'
 end

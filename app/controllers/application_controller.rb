@@ -47,7 +47,7 @@ class ApplicationController < ActionController::Base
     if current_user
       store_location
       flash[:notice] = t('Logout required')
-      redirect_to root_url
+      redirect_to chart_gantt_url
       return false
     end
   end

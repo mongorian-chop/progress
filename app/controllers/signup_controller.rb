@@ -8,7 +8,7 @@ class SignupController < ApplicationController
     @team = Team.new(params[:team])
     if @team.save
       flash[:notice] = t('Signup successfully')
-      redirect_to chart_url
+      redirect_to chart_gantt_url
     else
       render :action => :new
     end

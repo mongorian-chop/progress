@@ -11,4 +11,8 @@ class User < ActiveRecord::Base
   validates_length_of :unit, :maximum => 255, :allow_nil => true
   validates_length_of :email, :maximum => 255
   validates_length_of :phone_number, :maximum => 13, :allow_nil => true
+
+  def full_name
+    "#{last_name} #{first_name}"
+  end
 end

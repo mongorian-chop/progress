@@ -9,20 +9,31 @@
     %meta{:name => 'description', :content => yield(:description) || t('application.description')}
     %meta{:name => 'keywords', :content => yield(:keywords) || t('application.keywords')}
     %title= yield(:title) || t('application.title')
-    = javascript_include_tag 'http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js'
-    = javascript_include_tag 'http://ajax.googleapis.com/ajax/libs/jqueryui/1.7.2/jquery-ui.min.js'
-    = javascript_include_tag "http://ajax.googleapis.com/ajax/libs/jqueryui/1/i18n/jquery.ui.datepicker-#{I18n.locale}.min.js"
     = stylesheet_link_tag 'http://ajax.googleapis.com/ajax/libs/jqueryui/1.7.2/themes/flick/jquery-ui', :media => 'screen'
+    = stylesheet_link_tag 'ui.jqgrid', :media => 'screen'
+    = stylesheet_link_tag 'chart', :media => 'screen'
+    = stylesheet_link_tag 'jquery.ganttView', :media => 'screen'
+    = javascript_include_tag 'http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js'
+    = javascript_include_tag 'http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.2/jquery-ui.min.js'
+    = javascript_include_tag "http://ajax.googleapis.com/ajax/libs/jqueryui/1/i18n/jquery.ui.datepicker-#{I18n.locale}.min.js"
     = javascript_include_tag 'libs/jquery.layout.min'
     = javascript_include_tag "i18n/locale.default-#{I18n.locale}"
-    = stylesheet_link_tag 'ui.jqgrid', :media => 'screen'
-    = javascript_include_tag 'libs/grid.locale-jp'
-    = javascript_include_tag 'libs/jquery.jqGrid.min'
-    = stylesheet_link_tag 'style', :media => 'screen'
     = javascript_include_tag 'libs/date'
     = javascript_include_tag 'libs/jquery.ganttView'
-    = stylesheet_link_tag 'jquery.ganttView', :media => 'screen'
     = javascript_include_tag 'app.js'
     = javascript_include_tag 'layout.js'
     = javascript_include_tag 'grid.js'
-  %body= yield
+  %body
+    #header
+      %h1= link_to 'Progress Gantt Chart', chart_gantt_path
+      %ul.tabs
+        %li= link_to t('Gantt chart'), chart_gantt_path
+        %li= link_to t('Project'), chart_project_path
+        %li= link_to t('User'), chart_user_path
+      %ul#nav
+        %li= current_user.full_name
+        %li.button= link_to t('Logout'), logout_path
+    #main
+      = yield
+    #footer
+      %p footer...

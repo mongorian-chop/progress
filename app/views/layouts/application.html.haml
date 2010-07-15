@@ -19,6 +19,7 @@
     #nav
       %ul
         - if logged_in?
+          %li= link_to t('Gantt Chart'), chart_gantt_path
           %li= link_to t('Logout'), logout_path
         - else
           %li= link_to t('Login'), login_path

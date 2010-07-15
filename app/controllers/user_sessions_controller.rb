@@ -9,7 +9,7 @@ class UserSessionsController < ApplicationController
     @user_session = UserSession.new(params[:user_session])
     if @user_session.save
       flash[:notice] = t('Logged in successfully')
-      redirect_to chart_url
+      redirect_to chart_gantt_url
     else
       flash[:notice] = t('Logged in failed')
       render :action => :new

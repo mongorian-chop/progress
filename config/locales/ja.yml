@@ -145,25 +145,25 @@ ja:
       user: ユーザー
       user_session: ユーザーセッション
 
-    attributes: 
+    attributes:
       priority:
         name: 名前
 
-      status: 
+      status:
         name: 名前
 
-      plan: 
+      plan:
         name: 名前
         max: 最大ユーザー数
         price: 価格
 
-      team: 
+      team:
         name: チーム名
         plan: プラン
         created_at: 登録日時
         updated_at: 更新日時
 
-      user: 
+      user:
         login: アカウント名
         email: Email
         password: パスワード
@@ -182,7 +182,7 @@ ja:
         phone_number: 電話番号
         admin: 管理者
 
-      project: 
+      project:
         name: プロジェクト名
         description: 概要
         start_on: 開始日
@@ -190,7 +190,7 @@ ja:
         created_at: 登録日時
         updated_at: 更新日時
 
-      task: 
+      task:
         name: タスク名
         description: 詳細
         start_on: 開始日
@@ -202,7 +202,7 @@ ja:
         created_at: 登録日時
         updated_at: 更新日時
 
-      user_session: 
+      user_session:
         login: アカウント名
         password: パスワード
 
@@ -235,8 +235,9 @@ ja:
   Please select: "--- 選択してください ---"
   Now loading: 読み込み中…
   Change password: パスワード変更
-  Gantt view: ガントビュー
-  Task view: タスクビュー
+  Gantt chart: ガントチャート
+  Project: プロジェクト
+  User: ユーザー
 
   priority:
     highest: 緊急
