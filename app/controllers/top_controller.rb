@@ -1,10 +1,10 @@
 class TopController < ApplicationController
-  before_filter :require_user
-  layout 'chart'
+  before_filter :require_user, :only => [:chart]
 
   def index
   end
 
-  def gantt
+  def chart
+    render 'chart', :layout => 'chart'
   end
 end

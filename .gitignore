@@ -8,3 +8,4 @@ VERSION
 vendor/bundle
 src/app/tmp/cache
 src/app/tmp/logs
+tmp/*

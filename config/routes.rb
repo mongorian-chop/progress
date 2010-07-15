@@ -18,4 +18,5 @@ ActionController::Routing::Routes.draw do |map|
   map.messages 'messages/:lang', :controller => 'messages', :action => 'show'
   map.root :controller => 'top'
   map.root_for_yahoo '/index.html', :controller => 'top'
+  map.chart 'chart', :controller => 'top', :action => 'chart'
 end

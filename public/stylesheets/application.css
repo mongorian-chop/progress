@@ -1,0 +1,30 @@
+body {
+  font: 16px/1.5 HiraMaruPro-W4, メイリオ, Lucida Sans Unicode, Lucida Grande, Arial, Helvetica, ヒラギノ丸ゴ Pro W4, HiraMaruPro-W4, Verdana, HiraMaruPro-W4, ヒラギノ角ゴ Pro W3, HiraKakuPro-W3, Osaka, sans-serif;
+  line-height: 1.7;
+}
+
+#nav {
+  position: absolute;
+  top: 1em;
+  right: 1em;
+}
+#nav ul {
+  margin: 0;
+  padding: 0;
+}
+#nav ul li {
+  margin-left: 0.8em;
+  display: inline;
+}
+
+#footer {
+  text-align: center;
+}
+#footer ul {
+  margin: 0;
+  padding: 0;
+}
+#footer ul li {
+  margin-left: 0.8em;
+  display: inline;
+}

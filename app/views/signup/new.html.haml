@@ -1,4 +1,30 @@
 %h2= t('Signup')
+%h3= t('Plan')
+%ul
+  %li
+    .name Freeプラン
+    .price 無料。
+    .max メンバー数、プロジェクト数、最大１。
+  %li
+    .name Woodプラン
+    .price 月額xxx円。
+    .max メンバー数、プロジェクト数、最大３。
+  %li
+    .name Bronzeプラン
+    .price 月額xxx円。
+    .max メンバー数、プロジェクト数、最大10。
+  %li
+    .name Silverプラン
+    .price 月額xxx円。
+    .max メンバー数、プロジェクト数、最大30。
+  %li
+    .name Goldプラン
+    .price 月額xxx円。
+    .max メンバー数、プロジェクト数、最大50。
+  %li
+    .name Plutinumプラン
+    .price 月額xxx円。
+    .max メンバー数、プロジェクト数、最大100。
 - form_for @team, :url => signup_path do |f|
   = f.error_messages
   %p

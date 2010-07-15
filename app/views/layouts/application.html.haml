@@ -10,4 +10,25 @@
     %title= yield(:title) || t('application.title')
     %link{:rel => 'shortcut icon', :href => '/favicon.ico'}
     = javascript_include_tag 'http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js'
-  %body= yield
+    = stylesheet_link_tag 'application'
+  %body
+    #header
+      %h1= link_to 'Progress Gantt Chart', root_path
+      .description
+        description...
+    #nav
+      %ul
+        - if logged_in?
+          %li= link_to t('Logout'), logout_path
+        - else
+          %li= link_to t('Login'), login_path
+          %li= link_to t('Signup'), signup_path
+    #main
+      = yield
+    #footer
+      %ul
+        %li= link_to t('Company')
+        %li= link_to t('FAQ')
+        %li= link_to t('Contact')
+      .copyright
+        Copy right <a href="http://fjord.jp/">FJORD, LLC</a>

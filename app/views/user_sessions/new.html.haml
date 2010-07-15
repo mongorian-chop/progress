@@ -1,24 +1,12 @@
-.login.section.ui-corner-all
-  .ui-widget-header.ui-corner-all.header
-    %h2= t('Login')
-  .tooltip.shadow
-  - form_for @user_session, :url => user_session_path do |f|
-    .input.text
-      = f.label :login
-      = f.text_field :login, :class => "required email tips text ui-widget-content ui-corner-all", :title => t('activerecord.attributes.user.login') + t('activerecord.errors.messages.blank')
-    .input.password
-      = f.label :password
-      = f.password_field :password, :class => "required tips text ui-widget-content ui-corner-all", :title => t('activerecord.attributes.user.password') + t('activerecord.errors.messages.blank')
-    = f.submit t('Login'), :class => "login submit ui-state-default ui-corner-all"
-    = link_to t('Signup'), signup_path
-  .clearfix
-:javascript
-  $(document).ready(function() {
-      $("div :input.tips").tooltip({
-          position: "center right",
-          offset: [-2, 10],
-          effect: "fade",
-          opacity: 0.7,
-          tip: '.tooltip'
-      });
-  });
+%h2= t('Login')
+- form_for @user_session, :url => user_session_path do |f|
+  %p
+    = f.label :login
+    %br
+    = f.text_field :login
+  %p
+    = f.label :password
+    %br
+    = f.password_field :password
+  %p
+    = f.submit t('Login')
