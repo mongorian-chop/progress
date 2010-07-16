@@ -1,14 +1,13 @@
 body {
   margin: 0;
   padding: 0;
-  font: 16px/1.5 HiraMaruPro-W4, メイリオ, Lucida Sans Unicode, Lucida Grande, Arial, Helvetica, ヒラギノ丸ゴ Pro W4, HiraMaruPro-W4, Verdana, HiraMaruPro-W4, ヒラギノ角ゴ Pro W3, HiraKakuPro-W3, Osaka, sans-serif;
-  line-height: 1.7;
+  font: 14px HiraMaruPro-W4, メイリオ, Lucida Sans Unicode, Lucida Grande, Arial, Helvetica, ヒラギノ丸ゴ Pro W4, HiraMaruPro-W4, Verdana, HiraMaruPro-W4, ヒラギノ角ゴ Pro W3, HiraKakuPro-W3, Osaka, sans-serif;
 }
 
 h1 {
   margin: 0;
   padding: 0;
-  font-size: 16px;
+  font-size: 14px;
   display: block;
   float: left;
   background: #9999ff;
@@ -44,4 +43,63 @@ ul.tabs li {
   margin: 0;
   padding: 0;
   text-align: center;
+}
+
+.button {
+  cursor: pointer;
+}
+
+ul#action {
+  float: right;
+  margin: 0;
+  padding: 0;
+}
+ul#action li {
+  margin-left: 0.8em;
+  display: inline;
+  display: block;
+  float: left;
+}
+
+table.tablesorter {
+  clear: both;
+  font-family: arial;
+  background-color: #cdcdcd;
+  margin: 0;
+  font-size: 8pt;
+  width: 100%;
+  text-align: left;
+}
+table.tablesorter thead tr th, table.tablesorter tfoot tr th {
+  background-color: #e6eeee;
+  font-size: 8pt;
+  padding: 4px;
+}
+table.tablesorter thead tr .header {
+  background-image: url(/images/jquery.tablesorter/bg.gif);
+  background-repeat: no-repeat;
+  background-position: center right;
+  cursor: pointer;
+}
+table.tablesorter tbody td {
+  color: #3d3d3d;
+  padding: 4px;
+  vertical-align: top;
+}
+table.tablesorter tbody tr {
+  border: 1px solid #cccccc;
+  background-color: white;
+}
+table.tablesorter tbody tr.selected {
+  background-color: red;
+}
+table.tablesorter thead tr .headerSortUp {
+  background-image: url(/images/jquery.tablesorter/asc.gif);
+}
+table.tablesorter thead tr .headerSortDown {
+  background-image: url(/images/jquery.tablesorter/desc.gif);
+  background-color: #8dbdd8;
+}
+table.tablesorter thead tr .headerSortUp {
+  background-color: #8dbdd8;
 }

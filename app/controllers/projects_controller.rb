@@ -3,7 +3,7 @@ class ProjectsController < ApplicationController
   before_filter :find_project, :only => [:show, :update, :destroy]
 
   def index
-    render :json => {"rows" => Project.find(:all, :select => "id, *, 'true' AS isLeaf, 0 AS level").collect(&:attributes)}
+    render :json => Project.all.map(&:attributes)
   end
 
   def show

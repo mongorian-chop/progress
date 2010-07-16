@@ -10,19 +10,12 @@
     %meta{:name => 'keywords', :content => yield(:keywords) || t('application.keywords')}
     %title= yield(:title) || t('application.title')
     = stylesheet_link_tag 'http://ajax.googleapis.com/ajax/libs/jqueryui/1.7.2/themes/flick/jquery-ui', :media => 'screen'
-    = stylesheet_link_tag 'ui.jqgrid', :media => 'screen'
     = stylesheet_link_tag 'chart', :media => 'screen'
-    = stylesheet_link_tag 'jquery.ganttView', :media => 'screen'
     = javascript_include_tag 'http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js'
     = javascript_include_tag 'http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.2/jquery-ui.min.js'
-    = javascript_include_tag "http://ajax.googleapis.com/ajax/libs/jqueryui/1/i18n/jquery.ui.datepicker-#{I18n.locale}.min.js"
-    = javascript_include_tag 'libs/jquery.layout.min'
-    = javascript_include_tag "i18n/locale.default-#{I18n.locale}"
-    = javascript_include_tag 'libs/date'
-    = javascript_include_tag 'libs/jquery.ganttView'
-    = javascript_include_tag 'app.js'
-    = javascript_include_tag 'layout.js'
-    = javascript_include_tag 'grid.js'
+    - header_script = yield(:header_script)
+    - if header_script
+      = header_script
   %body
     #header
       %h1= link_to 'Progress Gantt Chart', chart_gantt_path
@@ -36,4 +29,4 @@
     #main
       = yield
     #footer
-      %p footer...
+      %p footer

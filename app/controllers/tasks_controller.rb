@@ -6,7 +6,7 @@ class TasksController < ApplicationController
   def index
     sort = params[:sort].blank? ? 'id' : params[:sort]
     order = params[:order].blank? ? 'ASC' : params[:order]
-    render :json => {"rows" => Task.jsonize(@project, sort, order)}
+    render :json => Task.jsonize(@project, sort, order)
   end
 
   def show
