@@ -3,11 +3,11 @@ class ProjectsController < ApplicationController
   before_filter :find_project, :only => [:show, :update, :destroy]
 
   def index
-    render :json => Project.all.map(&:attributes)
+    render :json => current_user.team.projects.map(&:attributes)
   end
 
   def show
-    render :json => @project.attributes
+    render :json => current_user.team.projects.find(params[:id]).attributes
   end
 
   def create

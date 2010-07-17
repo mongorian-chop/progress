@@ -168,9 +168,10 @@ ja:
         email: Email
         password: パスワード
         password_confirmation: パスワード（確認）
-        crypted_password: "暗号化されたパスワード"
-        password_salt: "パスワードソルト"
-        persistence_token: "永続トークン"
+        crypted_password: 暗号化されたパスワード
+        password_salt: パスワードソルト
+        persistence_token: 永続トークン
+        last_login_at: 最終ログイン日時
 
         team: チーム
         first_name: 名
@@ -238,6 +239,7 @@ ja:
   Gantt chart: ガントチャート
   Project: プロジェクト
   User: ユーザー
+  Are you sure: 本当によろしいですか？
 
   priority:
     highest: 緊急

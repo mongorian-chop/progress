@@ -18,7 +18,7 @@ ActionController::Routing::Routes.draw do |map|
   map.logout   'logout', :controller => 'user_sessions', :action => 'destroy'
   map.signup   'signup', :controller => 'signup', :action => 'new', :conditions => {:method => :get}
   map.signup   'signup', :controller => 'signup', :action => 'create', :conditions => {:method => :post}
-  map.messages 'messages/:lang', :controller => 'messages', :action => 'show'
+  map.messages '/javascripts/messages/:lang.js', :controller => 'messages', :action => 'show'
   map.root :controller => 'top'
   map.root_for_yahoo '/index.html', :controller => 'top'
 end
