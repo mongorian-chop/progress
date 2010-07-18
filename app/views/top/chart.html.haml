@@ -1,7 +1,7 @@
 #tabs
   %ul
     %li
-      %h1 Progress
+      %h1 PROGRESS
     %li= link_to t('Gantt chart'), '#gantt'
     %li= link_to t('Project'), '#project'
     %li= link_to t('User'), '#user'
@@ -9,5 +9,32 @@
       #full_name= current_user.full_name
       %button#logout= t('Logout')
   #gantt
+    .action
+      %select.project
+        %option= t('All project')
+      %button.add= t('Add')
+      %button.edit= t('Edit')
+      %button.delete= t('Delete')
+      %select.sort
+        %option= t('Sort by Name')
+        %option= t('Sort by Name DESC')
+        %option= t('Sort by Start On')
+        %option= t('Sort by Start On DESC')
+        %option= t('Sort by End On')
+        %option= t('Sort by End On DESC')
+    .content
+      .loading= image_tag('loading.gif') + t('Now loading')
   #project
+    .action
+      %button.add= t('Add')
+      %button.edit= t('Edit')
+      %button.delete= t('Delete')
+    .content
+      .loading= image_tag('loading.gif') + t('Now loading')
   #user
+    .action
+      %button.add= t('Add')
+      %button.edit= t('Edit')
+      %button.delete= t('Delete')
+    .content
+      .loading= image_tag('loading.gif') + t('Now loading')

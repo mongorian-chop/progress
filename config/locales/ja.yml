@@ -240,7 +240,13 @@ ja:
   Project: プロジェクト
   User: ユーザー
   Are you sure: 本当によろしいですか？
-
+  Sort by Name: 名前（昇順）
+  Sort by Name DESC: 名前（降順）
+  Sort by Start On: 開始日（昇順）
+  Sort by Start On DESC: 開始日（降順）
+  Sort by End On: 終了日（昇順）
+  Sort by End On DESC: 終了日（降順）
+  All project: 全てのプロジェクト
   priority:
     highest: 緊急
     high: 高

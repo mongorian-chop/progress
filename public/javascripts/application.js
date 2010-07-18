@@ -10,12 +10,13 @@
    */
   $.fn.load_table_from_json = function(name, columns) {
     var src = $(this)
-    var table = $('<table>', {'class':name.pluralize()+' tablesorter'})
-    .append($('<thead>').append($('<tr>'))).append($('<tbody>'))
-    for (var i = 0; i < columns.length; ++i) {
-      $('thead tr', table).append($('<th>').text(L['activerecord']['attributes'][name][columns[i]]))
-    }
     $.getJSON('/'+name.pluralize(), function(objects) {
+      src.empty()
+      var table = $('<table>', {'class':name.pluralize()+' tablesorter'})
+      .append($('<thead>').append($('<tr>'))).append($('<tbody>'))
+      for (var i = 0; i < columns.length; ++i) {
+        $('thead tr', table).append($('<th>').text(L['activerecord']['attributes'][name][columns[i]]))
+      }
       src.append(table)
       for (var i = 0; i < objects.length; i++) {
         var o = objects[i]
@@ -25,7 +26,7 @@
         }))
         for (var j = 0; j < columns.length; ++j) {
           $('tbody tr:last', table).append($('<td>', {'class':columns[j]}).text(o[columns[j]] || ''))
-        } 
+        }
       }
       $(table).tablesorter()
     })
