@@ -60,5 +60,5 @@ $(function(){
       })
     }).button())
   )
-  $('#main').load_table_from_json('project', 'projects', ['name', 'start_on', 'end_on', 'description'])
+  $('#main').load_table_from_json('project', ['name', 'start_on', 'end_on', 'description'])
 })

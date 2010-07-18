@@ -260,7 +260,7 @@ BrokenLineConnector.prototype.paint = function(dims, ctx){
           days = $(o).data('block-data').days
           re = DateUtils.resize(s, days, cellWidth);
           var between =0;
-          if(s.toString() != re["start"].toString()) {
+          if($(o).data('block-data').start.toString() != re["start"].toString()) {
             $(o).data('block-data').start = re["start"];
             between = DateUtils.daysBetween(s, re["start"]);
           }
@@ -271,6 +271,7 @@ BrokenLineConnector.prototype.paint = function(dims, ctx){
           $(o).css("margin-left", n+"px").css("left", "0px").css("width", re["width"]);
           ui.position.left=0
           change($(o), s, distance)
+          jsPlumb.repaintEverything();
         }
       }).resizable({
         containment: 'parent',
@@ -293,9 +294,11 @@ BrokenLineConnector.prototype.paint = function(dims, ctx){
           re = DateUtils.resize($(o).data('block-data').start.clone(), newDays, cellWidth);
           console.debug("cnt: %o, s %o, w: %o", newDays, re["start"], re["width"]);
           $(o).data('block-data').days = newDays;
+          $(o).find(".ganttview-block-text").text(newDays)
           $(o).css("width", re["width"]);
 
           change($(o), rs, rdistance)
+          jsPlumb.repaintEverything();
         }
       });
     }

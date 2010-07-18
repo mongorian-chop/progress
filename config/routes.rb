@@ -1,7 +1,4 @@
 ActionController::Routing::Routes.draw do |map|
-  map.chart_gantt   'gantt',   :controller => 'chart', :action => 'gantt'
-  map.chart_project 'project', :controller => 'chart', :action => 'project'
-  map.chart_user    'user',    :controller => 'chart', :action => 'user'
   map.resources :priorities, :except => [:new, :edit]
   map.resources :statuses, :except => [:new, :edit]
   map.resources :plans, :except => [:new, :edit]

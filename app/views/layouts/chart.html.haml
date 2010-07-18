@@ -9,26 +9,20 @@
     %meta{:name => 'description', :content => yield(:description) || t('application.description')}
     %meta{:name => 'keywords', :content => yield(:keywords) || t('application.keywords')}
     %title= yield(:title) || t('application.title')
-    = stylesheet_link_tag 'http://ajax.googleapis.com/ajax/libs/jqueryui/1.7.2/themes/cupertino/jquery-ui', :media => 'screen'
+    = stylesheet_link_tag 'http://ajax.googleapis.com/ajax/libs/jqueryui/1.7.2/themes/flick/jquery-ui', :media => 'screen'
     = stylesheet_link_tag 'chart', :media => 'screen'
+    = stylesheet_link_tag 'jquery.ganttView', :media => 'screen'
     = javascript_include_tag 'http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js'
     = javascript_include_tag 'http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.2/jquery-ui.min.js'
+    = javascript_include_tag 'jquery.tablesorter'
+    = javascript_include_tag 'jquery.jsPlumb-1.2-all-min'
+    = javascript_include_tag 'date'
+    = javascript_include_tag 'jquery.ganttView'
     = javascript_include_tag messages_path(:lang => I18n.locale)
+    = javascript_include_tag 'inflection'
     = javascript_include_tag 'application'
+    = javascript_include_tag 'chart'
     - header_script = yield(:header_script)
     - if header_script
       = header_script
-  %body
-    #header
-      %h1= link_to 'Progress Gantt Chart', chart_gantt_path
-      %ul.tabs
-        %li= link_to t('Gantt chart'), chart_gantt_path
-        %li= link_to t('Project'), chart_project_path
-        %li= link_to t('User'), chart_user_path
-      %ul#nav
-        %li= current_user.full_name
-        %li.button= link_to t('Logout'), logout_path
-    #main
-      = yield
-    #footer
-      %p footer
+  %body= yield

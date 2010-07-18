@@ -65,5 +65,5 @@ $(function(){
       })
     }).button())
   )
-  $('#main').load_table_from_json('user', 'users', columns)
+  $('#main').load_table_from_json('user', columns)
 })

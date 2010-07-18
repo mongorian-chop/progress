@@ -1,0 +1,13 @@
+#tabs
+  %ul
+    %li
+      %h1 Progress
+    %li= link_to t('Gantt chart'), '#gantt'
+    %li= link_to t('Project'), '#project'
+    %li= link_to t('User'), '#user'
+    %li#etc
+      #full_name= current_user.full_name
+      %button#logout= t('Logout')
+  #gantt
+  #project
+  #user

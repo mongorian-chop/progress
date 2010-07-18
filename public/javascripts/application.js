@@ -1,26 +1,25 @@
 (function($){
   /*
    * Example:
-   *   $('#main').load_table_from_json('project', 'projects', ['id', 'name', 'description'])
+   *   $('#main').load_table_from_json('project', ['id', 'name', 'description'])
    * Params:
-   *   singleName = 'project'
-   *   pluralName = 'projects'
-   *   columns    = ['id', 'name', 'description']
+   *   name    = 'project'
+   *   columns = ['id', 'name', 'description']
    * Return:
    *   $(this)
    */
-  $.fn.load_table_from_json = function(singleName, pluralName, columns) {
+  $.fn.load_table_from_json = function(name, columns) {
     var src = $(this)
-    var table = $('<table>', {'class':pluralName+' tablesorter'})
+    var table = $('<table>', {'class':name.pluralize()+' tablesorter'})
     .append($('<thead>').append($('<tr>'))).append($('<tbody>'))
     for (var i = 0; i < columns.length; ++i) {
-      $('thead tr', table).append($('<th>').text(L['activerecord']['attributes'][singleName][columns[i]]))
+      $('thead tr', table).append($('<th>').text(L['activerecord']['attributes'][name][columns[i]]))
     }
-    $.getJSON('/'+pluralName, function(objects) {
+    $.getJSON('/'+name.pluralize(), function(objects) {
       src.append(table)
       for (var i = 0; i < objects.length; i++) {
         var o = objects[i]
-        $('tbody', table).append($('<tr>', {'class':singleName}).data(o).click(function() {
+        $('tbody', table).append($('<tr>', {'class':name}).data(o).click(function() {
           $(this).siblings().removeClass('selected')
           .end().toggleClass('selected')
         }))
