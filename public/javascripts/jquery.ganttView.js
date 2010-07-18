@@ -70,8 +70,7 @@ BrokenLineConnector.prototype.paint = function(dims, ctx){
       Chart.addVtHeader(div, opts.data, opts.cellHeight)
 
       var slideDiv = jQuery("<div>", {
-        "class": "ganttview-slide-container",
-        "css": { "width": opts.slideWidth + "px" }
+        "class": "ganttview-slide-container"
       })
 
       Chart.addHzHeader(slideDiv, months, opts.cellWidth)

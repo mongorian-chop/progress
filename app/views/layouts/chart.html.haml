@@ -10,8 +10,8 @@
     %meta{:name => 'keywords', :content => yield(:keywords) || t('application.keywords')}
     %title= yield(:title) || t('application.title')
     = stylesheet_link_tag 'http://ajax.googleapis.com/ajax/libs/jqueryui/1.7.2/themes/flick/jquery-ui', :media => 'screen'
-    = stylesheet_link_tag 'chart', :media => 'screen'
     = stylesheet_link_tag 'jquery.ganttView', :media => 'screen'
+    = stylesheet_link_tag 'chart', :media => 'screen'
     = javascript_include_tag 'http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js'
     = javascript_include_tag 'http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.2/jquery-ui.min.js'
     = javascript_include_tag 'jquery.tablesorter'

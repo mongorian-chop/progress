@@ -2,30 +2,117 @@ $(function() {
   $('#logout').click(function(){ location.href = '/logout' }).button()
   $('#tabs').tabs()
 
-  var ganttData = [
-    {id: 1, name: "タスク1", start: new Date(2010,01,02), end: new Date(2010,01,06), days: 3},
-    {id: 2, name: "タスク2", start: new Date(2010,01,05), end: new Date(2010,01,09), days: 4, depends: [1]},
-    {id: 3, name: "タスク3", start: new Date(2010,01,08), end: new Date(2010,01,12), days: 2},
-    {id: 4, name: "タスク4", start: new Date(2010,01,04), end: new Date(2010,01,09), days: 4},
-    {id: 5, name: "タスク5", start: new Date(2010,01,11), end: new Date(2010,01,15), days: 5, depends: [2, 4]}
-  ]
-  $("#gantt").ganttView({
-    data: ganttData,
-    cellWidth: 21,
-    start: new Date(2010,01,01),
-    end: new Date(2010,05,15),
-    slideWidth: 500,
-    blockClick: function() {
-      console.log("click");
-    },
-    itemClick: function(data) {
-        console.log(data.id);
-    },
-    change: function(o,s,m) {
-//        console.log(o.data('block-data').id);
+  // task
+  $('#gantt')
+  .append($('<div>', {'class':'action'}))
+  .append($('<div>', {'id':'gantt-chart'}))
+
+  $('#gantt .action')
+  .append($('<select>', {'class':'project'}))
+  .append($('<button>').text(L['Add']).click(function() {
+    $('<p>Add</p>').dialog({
+      title: L['Add'],
+      resizable: false,
+      draggable: false,
+      modal: true,
+      buttons: {
+        'Add': function() {
+          $(this).dialog('close')
+        },
+        'Cancel': function() {
+          $(this).dialog('close')
+        }
+      }
+    })
+  }).button())
+  .append($('<button>').text(L['Edit']).click(function() {
+    var project = $('.selected').data()
+    $('<form>')
+    .append($('<label>').text(L['activerecord']['attributes']['project']['name']))
+    .append($('<input>').val(project['name']))
+    .append($('<label>').text(L['activerecord']['attributes']['project']['start_on']))
+    .append($('<input>').val(project['start_on']))
+    .append($('<label>').text(L['activerecord']['attributes']['project']['end_on']))
+    .append($('<input>').val(project['end_on']))
+    .append($('<label>').text(L['activerecord']['attributes']['project']['description']))
+    .append($('<textarea>').val(project['description']))
+    .dialog({
+      title: L['Edit'],
+      resizable: false,
+      draggable: false,
+      modal: true,
+      buttons: {
+        'Edit': function() {
+          $(this).dialog('close')
+        },
+        'Cancel': function() {
+          $(this).dialog('close')
+        }
+      }
+    })
+  }).button())
+  .append($('<button>').text(L['Delete']).click(function() {
+    $('<p>'+L['Are you sure']+'</p>').dialog({
+      title: L['Delete'],
+      resizable: false,
+      draggable: false,
+      modal: true,
+      buttons: {
+        'Delete': function() {
+          $(this).dialog('close')
+        },
+        'Cancel': function() {
+          $(this).dialog('close')
+        }
+      }
+    })
+  }).button())
+  .append(
+    $('<select>')
+    .append($('<option>').text('Name'))
+    .append($('<option>').text('Name (DESC)'))
+    .append($('<option>').text('Start On'))
+    .append($('<option>').text('Start On (DESC)'))
+    .append($('<option>').text('End On'))
+    .append($('<option>').text('End On (DESC)'))
+  )
+
+  $.getJSON('/projects', function(objects) {
+    var p = $("#gantt .action .project")
+    for (var i = 0; i < objects.length; i++) {
+      p.append($('<option>').text(objects[i]['name']).val(objects[i]['id']))
     }
   })
 
+  $.getJSON('/tasks', function(objects) {
+    var ganttData = []
+    for (var i = 0; i < objects.length; i++) {
+      var o = objects[i]
+      ganttData.push({
+        id:    o['id'],
+        name:  o['name'],
+        start: Date.parse(o['start_on'], 'yyyy-MM-dd'),
+        days:  o['days']
+      })
+    }
+
+    $("#gantt-chart").ganttView({
+      data: ganttData,
+      cellWidth: 21,
+      start: new Date(2010,5,1),
+      end: new Date(2010,12,31),
+      blockClick: function() {
+        console.log("click");
+      },
+      itemClick: function(data) {
+        console.log(data.id);
+      },
+      change: function(o,s,m) {
+      }
+    })
+  })
+
+  // project
   $('#project').append(
     $('<div>', {'class':'action'})
     .append($('<button>').text(L['Add']).click(function() {
@@ -89,6 +176,7 @@ $(function() {
   )
   $('#project').load_table_from_json('project', ['name', 'start_on', 'end_on', 'description'])
 
+  // user
   $('#user').append(
     $('<div>', {'class':'action'})
     .append($('<button>').text(L['Add']).click(function() {
