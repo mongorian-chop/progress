@@ -14,16 +14,13 @@ end: date
 cellWidth: number
 cellHeight: number
 slideWidth: number
-
-var ChartLang = {
-    days: "days",
-              monthNames: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
 };
 */
 var ChartLang = {
-    days: "人日",
-    monthNames: ["1月", "2月", "3月", "4月", "5月", "6月", "7月", "8月", "9月", "10月", "11月", "12月"]
+    days: "days",
+    monthNames: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
 };
+
 
 // points: array of [x, y] (float) representing relative break points
 function BrokenLineConnector(points){ this.points = points || [] }
@@ -38,7 +35,10 @@ BrokenLineConnector.prototype.paint = function(dims, ctx){
   ctx.lineTo(tx, ty);
   ctx.stroke();
 };
-
+function newDate(year ,month ,day){
+    if(month>0) month -= 1
+    return new Date(year,month,day)
+}
 (function (jQuery) {
   jQuery.fn.ganttView = function (options) {
     var els = this
@@ -46,7 +46,6 @@ BrokenLineConnector.prototype.paint = function(dims, ctx){
       showWeekends: true,
       cellWidth: 21,
       cellHeight: 21,
-      slideWidth: 400,
       vHeaderWidth: 100,
       blockClick: null,
       itemClick: null,
@@ -62,7 +61,10 @@ BrokenLineConnector.prototype.paint = function(dims, ctx){
                    new jsPlumb.Endpoints.Triangle({width: 8, height: 6})],
        endpointStyle: {fillStyle: "red"}
     }, options.connection);
-
+    if(opts.chartLang){
+        if(opts.chartLang.days && opts.chartLang.days.length > 0) ChartLang.days = opts.chartLang.days
+        if(opts.chartLang.monthNames && opts.chartLang.monthNames.length > 0) ChartLang.monthNames = opts.chartLang.monthNames
+    }
     els.each(function () {
       var container = jQuery(this)
       var div = jQuery("<div>", { "class": "ganttview" })
@@ -99,6 +101,7 @@ BrokenLineConnector.prototype.paint = function(dims, ctx){
 
     getMonths: function (start, end) {
       start = Date.parse(start); end = Date.parse(end)
+
       var months = []; months[start.getMonth()] = [start]
       var last = start
       while (last.compareTo(end) == -1) {
@@ -186,11 +189,11 @@ BrokenLineConnector.prototype.paint = function(dims, ctx){
       for (var i = 0; i < data.length; i++) {
         var series = data[i]
         if(!series.days) {
-          series.days = DateUtils.daysBetween(series.start, series.end)
+            series.days = DateUtils.daysBetween(series.start, series.end)
         }
         if (series.days && series.days > 0) {
           if (series.days > 365) { series.days = 365; } // Keep blocks from overflowing a year
-          var offset = DateUtils.daysBetween(start, series.start)
+          var offset = DateUtils.daysBetween(start, series.start ,true)
           var width = DateUtils.getWidth(series.start, series.days, cellWidth)
           var blockDiv = jQuery("<div>", {
             "id": "ganttview-block-" + series.id,
@@ -332,11 +335,21 @@ BrokenLineConnector.prototype.paint = function(dims, ctx){
   }
 
   var DateUtils = {
-    daysBetween: function (start, end) {
+    daysBetween: function (start, end , offsetMode) {
       if (!start || !end) { return 0; }
       start = Date.parse(start); end = Date.parse(end)
       if (start.getYear() == 1901 || end.getYear() == 8099) { return 0; }
       var count = 0, date = start.clone()
+      if(offsetMode){
+          var flg = true
+          while(flg) {
+            if(this.isWeekend(end)) {
+              end.addDays(1)
+            }else{
+              flg = false
+            }
+          }
+      }
       while (date.compareTo(end) == -1) { count = count + 1; date.addDays(1); }
       return count
     },
