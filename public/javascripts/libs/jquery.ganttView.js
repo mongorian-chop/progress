@@ -14,31 +14,17 @@ end: date
 cellWidth: number
 cellHeight: number
 slideWidth: number
+
+var ChartLang = {
+    days: "days",
+              monthNames: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
 };
 */
 var ChartLang = {
-    days: "days",
-    monthNames: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
+    days: "人日",
+    monthNames: ["1月", "2月", "3月", "4月", "5月", "6月", "7月", "8月", "9月", "10月", "11月", "12月"]
 };
 
-
-// points: array of [x, y] (float) representing relative break points
-function BrokenLineConnector(points){ this.points = points || [] }
-BrokenLineConnector.prototype = new jsPlumb.Connectors.Straight;
-BrokenLineConnector.prototype.paint = function(dims, ctx){
-  var sx = dims[4], sy = dims[5], tx = dims[6], ty = dims[7];
-  ctx.beginPath();
-  ctx.moveTo(sx, sy);
-  for(var ps = this.points, i = -1, p; p = ps[++i];)
-    ctx.lineTo(sx + p[0] * (tx - sx),
-               sy + p[1] * (ty - sy));
-  ctx.lineTo(tx, ty);
-  ctx.stroke();
-};
-function newDate(year ,month ,day){
-    if(month>0) month -= 1
-    return new Date(year,month,day)
-}
 (function (jQuery) {
   jQuery.fn.ganttView = function (options) {
     var els = this
@@ -46,6 +32,7 @@ function newDate(year ,month ,day){
       showWeekends: true,
       cellWidth: 21,
       cellHeight: 21,
+      slideWidth: 400,
       vHeaderWidth: 100,
       blockClick: null,
       itemClick: null,
@@ -53,18 +40,7 @@ function newDate(year ,month ,day){
     }
     var opts = jQuery.extend(defaults, options)
     var months = Chart.getMonths(opts.start, opts.end)
-    var cnopts = jQuery.extend({
-       anchors: [jsPlumb.Anchors.LeftMiddle, jsPlumb.Anchors.RightMiddle],
-       connector: new BrokenLineConnector([[.5, 0], [.5, 1]]),
-       paintStyle: {lineWidth: 1, strokeStyle: "red"},
-       endpoints: [{paint: function(){}},
-                   new jsPlumb.Endpoints.Triangle({width: 8, height: 6})],
-       endpointStyle: {fillStyle: "red"}
-    }, options.connection);
-    if(opts.chartLang){
-        if(opts.chartLang.days && opts.chartLang.days.length > 0) ChartLang.days = opts.chartLang.days
-        if(opts.chartLang.monthNames && opts.chartLang.monthNames.length > 0) ChartLang.monthNames = opts.chartLang.monthNames
-    }
+
     els.each(function () {
       var container = jQuery(this)
       var div = jQuery("<div>", { "class": "ganttview" })
@@ -72,11 +48,12 @@ function newDate(year ,month ,day){
       Chart.addVtHeader(div, opts.data, opts.cellHeight)
 
       var slideDiv = jQuery("<div>", {
-        "class": "ganttview-slide-container"
+        "class": "ganttview-slide-container",
+        "css": { "width": opts.slideWidth + "px" }
       })
 
       Chart.addHzHeader(slideDiv, months, opts.cellWidth)
-      //Chart.addGrid(slideDiv, opts.data, months, opts.cellWidth, opts.showWeekends)
+      Chart.addGrid(slideDiv, opts.data, months, opts.cellWidth, opts.showWeekends)
       Chart.addBlockContainers(slideDiv, opts.data)
       Chart.addBlocks(slideDiv, opts.data, opts.cellWidth, opts.start, opts.change)
 
@@ -87,21 +64,16 @@ function newDate(year ,month ,day){
         jQuery("div.ganttview-slide-container", container).outerWidth()
 
       Chart.applyLastClass(container)
-      Chart.connectBlocks(opts.data, cnopts);
 
       Events.bindBlockClick(container, opts.blockClick)
       Events.bindItemClick(container, opts.itemClick)
     })
-
-    jQuery(".ganttview-slide-container").bind("scroll", jsPlumb.repaintEverything);
-    jQuery(document).bind("resize", jsPlumb.repaintEverything);
   }
 
   var Chart = {
 
     getMonths: function (start, end) {
       start = Date.parse(start); end = Date.parse(end)
-
       var months = []; months[start.getMonth()] = [start]
       var last = start
       while (last.compareTo(end) == -1) {
@@ -189,14 +161,13 @@ function newDate(year ,month ,day){
       for (var i = 0; i < data.length; i++) {
         var series = data[i]
         if(!series.days) {
-            series.days = DateUtils.daysBetween(series.start, series.end)
+          series.days = DateUtils.daysBetween(series.start, series.end)
         }
         if (series.days && series.days > 0) {
           if (series.days > 365) { series.days = 365; } // Keep blocks from overflowing a year
-          var offset = DateUtils.daysBetween(start, series.start ,true)
+          var offset = DateUtils.daysBetween(start, series.start)
           var width = DateUtils.getWidth(series.start, series.days, cellWidth)
           var blockDiv = jQuery("<div>", {
-            "id": "ganttview-block-" + series.id,
             "class": "ganttview-block",
             "title": series.name + ", " + series.days + ChartLang.days,
             "css": {
@@ -234,20 +205,6 @@ function newDate(year ,month ,day){
       jQuery("div.ganttview-hzheader-months div.ganttview-hzheader-month:last-child", div).addClass("last")
     },
 
-    connectBlocks: function (data, options) {
-      for (var i = 0; i < data.length; i++) {
-        var d = data[i]
-        if (!("depends" in d)) continue
-        for (var j = 0; j < d.depends.length; j++) {
-          var depend = d.depends[j]
-          jsPlumb.connect(jQuery.extend({
-            source: "ganttview-block-" + d.id,
-            target: "ganttview-block-" + depend
-          }, options))
-        }
-      }
-    },
-
     addEvent: function(o, cellWidth, change) {
       o.draggable({
         axis: 'x',
@@ -256,12 +213,13 @@ function newDate(year ,month ,day){
         stop: function(event, ui) {
           distance = ui.position.left / cellWidth
           s = $(o).data('block-data').start.clone().addDays(distance)
-          console.debug('block-data: %o', $(o).data('block-data'))
+          e = $(o).data('block-data').end.clone().addDays(distance)
+          console.debug('distance: %o, start: %o, end: %o', distance, s, e)
 
           days = $(o).data('block-data').days
           re = DateUtils.resize(s, days, cellWidth);
           var between =0;
-          if($(o).data('block-data').start.toString() != re["start"].toString()) {
+          if(s.toString() != re["start"].toString()) {
             $(o).data('block-data').start = re["start"];
             between = DateUtils.daysBetween(s, re["start"]);
           }
@@ -272,7 +230,6 @@ function newDate(year ,month ,day){
           $(o).css("margin-left", n+"px").css("left", "0px").css("width", re["width"]);
           ui.position.left=0
           change($(o), s, distance)
-          jsPlumb.repaintEverything();
         }
       }).resizable({
         containment: 'parent',
@@ -295,11 +252,9 @@ function newDate(year ,month ,day){
           re = DateUtils.resize($(o).data('block-data').start.clone(), newDays, cellWidth);
           console.debug("cnt: %o, s %o, w: %o", newDays, re["start"], re["width"]);
           $(o).data('block-data').days = newDays;
-          $(o).find(".ganttview-block-text").text(newDays)
           $(o).css("width", re["width"]);
 
           change($(o), rs, rdistance)
-          jsPlumb.repaintEverything();
         }
       });
     }
@@ -334,21 +289,11 @@ function newDate(year ,month ,day){
   }
 
   var DateUtils = {
-    daysBetween: function (start, end , offsetMode) {
+    daysBetween: function (start, end) {
       if (!start || !end) { return 0; }
       start = Date.parse(start); end = Date.parse(end)
       if (start.getYear() == 1901 || end.getYear() == 8099) { return 0; }
       var count = 0, date = start.clone()
-      if(offsetMode){
-          var flg = true
-          while(flg) {
-            if(this.isWeekend(end)) {
-              end.addDays(1)
-            }else{
-              flg = false
-            }
-          }
-      }
       while (date.compareTo(end) == -1) { count = count + 1; date.addDays(1); }
       return count
     },
