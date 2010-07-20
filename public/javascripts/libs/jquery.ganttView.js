@@ -256,8 +256,7 @@ function newDate(year ,month ,day){
         stop: function(event, ui) {
           distance = ui.position.left / cellWidth
           s = $(o).data('block-data').start.clone().addDays(distance)
-          e = $(o).data('block-data').end.clone().addDays(distance)
-          console.debug('distance: %o, start: %o, end: %o', distance, s, e)
+          console.debug('block-data: %o', $(o).data('block-data'))
 
           days = $(o).data('block-data').days
           re = DateUtils.resize(s, days, cellWidth);
