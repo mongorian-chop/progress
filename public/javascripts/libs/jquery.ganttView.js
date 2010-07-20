@@ -77,7 +77,7 @@ function newDate(year ,month ,day){
 
       Chart.addHzHeader(slideDiv, months, opts.cellWidth, opts.showWeekends)
       //Chart.addGrid(slideDiv, opts.data, months, opts.cellWidth, opts.showWeekends)
-      Chart.addBlockContainers(slideDiv, opts.data)
+      Chart.addBlockContainers(slideDiv, opts.data, opts.start, opts.cellWidth)
       Chart.addBlocks(slideDiv, opts.data, opts.cellWidth, opts.start, opts.change)
 
       div.append(slideDiv)
@@ -176,10 +176,15 @@ function newDate(year ,month ,day){
       div.append(gridDiv)
     },
 
-    addBlockContainers: function (div, data) {
+    addBlockContainers: function (div, data, start, cellWidth) {
+      offset = 0;
+      if(start) {
+        offset = start.getDay()-1 >= 0 ? (start.getDay()-1)*cellWidth : cellWidth*7
+      }
       var blocksDiv = jQuery("<div>", { "class": "ganttview-blocks" })
       for (var i = 0; i < data.length; i++) {
-        blocksDiv.append(jQuery("<div>", { "class": "ganttview-block-container index"+i }))
+        d = jQuery("<div>", { "class": "ganttview-block-container index"+i }).css("background-position", offset+"px")
+        blocksDiv.append(d)
       }
       div.append(blocksDiv)
     },

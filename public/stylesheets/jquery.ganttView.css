@@ -99,6 +99,7 @@ div.ganttview-blocks {
 div.ganttview-block-container {
   height: 18px;
   padding-top: 4px;
+  background: url("/images/bg.jpg") repeat;
 }
 
 div.ganttview-block {
