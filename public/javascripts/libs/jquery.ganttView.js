@@ -75,7 +75,7 @@ function newDate(year ,month ,day){
         "class": "ganttview-slide-container"
       })
 
-      Chart.addHzHeader(slideDiv, months, opts.cellWidth)
+      Chart.addHzHeader(slideDiv, months, opts.cellWidth, opts.showWeekends)
       //Chart.addGrid(slideDiv, opts.data, months, opts.cellWidth, opts.showWeekends)
       Chart.addBlockContainers(slideDiv, opts.data)
       Chart.addBlocks(slideDiv, opts.data, opts.cellWidth, opts.start, opts.change)
@@ -129,7 +129,7 @@ function newDate(year ,month ,day){
       div.append(headerDiv)
     },
 
-    addHzHeader: function (div, months, cellWidth) {
+    addHzHeader: function (div, months, cellWidth, showWeekends) {
       var headerDiv = jQuery("<div>", { "class": "ganttview-hzheader" })
       var monthsDiv = jQuery("<div>", { "class": "ganttview-hzheader-months" })
       var daysDiv = jQuery("<div>", { "class": "ganttview-hzheader-days" })
@@ -143,8 +143,9 @@ function newDate(year ,month ,day){
             "css": { "width": (w - 1) + "px" }
           }).append(ChartLang.monthNames[i]))
           for (var j = 0; j < months[i].length; j++) {
-            daysDiv.append(jQuery("<div>", { "class": "ganttview-hzheader-day" })
-            .append(months[i][j].getDate()))
+            dayDiv = jQuery("<div>", { "class": "ganttview-hzheader-day" })
+            if (DateUtils.isWeekend(months[i][j]) && showWeekends) {dayDiv.addClass("ganttview-weekend"); }
+            daysDiv.append(dayDiv.append(months[i][j].getDate()))
           }
         }
       }
