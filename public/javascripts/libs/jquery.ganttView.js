@@ -76,7 +76,7 @@ function newDate(year ,month ,day){
       })
 
       Chart.addHzHeader(slideDiv, months, opts.cellWidth)
-      Chart.addGrid(slideDiv, opts.data, months, opts.cellWidth, opts.showWeekends)
+      //Chart.addGrid(slideDiv, opts.data, months, opts.cellWidth, opts.showWeekends)
       Chart.addBlockContainers(slideDiv, opts.data)
       Chart.addBlocks(slideDiv, opts.data, opts.cellWidth, opts.start, opts.change)
 
