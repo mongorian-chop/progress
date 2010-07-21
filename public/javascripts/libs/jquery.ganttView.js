@@ -35,10 +35,7 @@ BrokenLineConnector.prototype.paint = function(dims, ctx){
   ctx.lineTo(tx, ty);
   ctx.stroke();
 };
-function newDate(year ,month ,day){
-    if(month>0) month -= 1
-    return new Date(year,month,day)
-}
+
 (function (jQuery) {
   jQuery.fn.ganttView = function (options) {
     var els = this
