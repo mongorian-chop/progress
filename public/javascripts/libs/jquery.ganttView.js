@@ -262,8 +262,6 @@ function newDate(year ,month ,day){
         stop: function(event, ui) {
           distance = ui.position.left / cellWidth
           s = $(o).data('block-data').start.clone().addDays(distance)
-          e = $(o).data('block-data').end.clone().addDays(distance)
-          console.debug('distance: %o, start: %o, end: %o', distance, s, e)
 
           days = $(o).data('block-data').days
           re = DateUtils.resize(s, days, cellWidth);
@@ -289,8 +287,6 @@ function newDate(year ,month ,day){
           $(o).css("left", "").css("top", "").css("position", "")
           rdistance = Math.ceil(ui.size.width / cellWidth)
           rs = $(o).data('block-data').start.clone().addDays(rdistance)
-          re = $(o).data('block-data').end.clone().addDays(rdistance)
-          console.debug('width: %o, originalSize: %o, day: %o', ui.size.width, ui.originalSize.width, rdistance)
 
           adds = ui.size.width-ui.originalSize.width;
           if(adds>0) {
