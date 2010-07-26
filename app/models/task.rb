@@ -23,11 +23,8 @@ class Task < ActiveRecord::Base
       last_name',
     :joins  => [:status, :priority, :user]
 
-  def self.jsonize(project = nil, sort = 'id', order = 'ASC')
-    (project ? project.tasks : Task).with_properties.order_by(sort, order).map do |task|
-      task.localize.attributes
-    end
-  end
+  named_scope :by_project_ids, lambda {|ids|
+    {:conditions => ['tasks.project_id IN (?)', ids]}}
 
   def localize
     self.priority_name = I18n.t("priority.#{self.priority_name}") if self.respond_to?(:priority_name)

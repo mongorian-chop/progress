@@ -4,9 +4,17 @@ class TasksController < ApplicationController
   before_filter :find_project, :only => [:index]
 
   def index
-    sort = params[:sort].blank? ? 'id' : params[:sort]
-    order = params[:order].blank? ? 'ASC' : params[:order]
-    render :json => Task.jsonize(@project, sort, order)
+    projects =
+      if @project
+        Task.by_project_id(@project.id).with_properties
+      else
+        ids = current_user.team.projects.map(&:id)
+        logger.debug "ids: #{ids}"
+        Task.by_project_ids(ids).with_properties
+      end
+    logger.debug "projects: #{projects}"
+
+    render :json => projects.map {|o| o.localize.attributes }
   end
 
   def show
