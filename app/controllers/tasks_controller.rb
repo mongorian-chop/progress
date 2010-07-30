@@ -6,7 +6,7 @@ class TasksController < ApplicationController
   def index
     projects =
       if @project
-        Task.by_project_id(@project.id).with_properties
+        Task.scoped_by_project_id(@project.id).with_properties
       else
         ids = current_user.team.projects.map(&:id)
         logger.debug "ids: #{ids}"

@@ -1,8 +1,11 @@
 $(function() {
   $('#logout').click(function(){ location.href = '/logout' }).button()
   $('#tabs').tabs()
+  $('select.project').change(function(o) {
+    load_gantt($('select.project option:selected').val())
+  })
 
-  var load_gantt = function() {
+  var load_gantt = function(project_id) {
     $('#gantt .action .add').button().click(function() {
       $('<p>Add</p>').dialog({
         title: L['Add'],
@@ -68,8 +71,9 @@ $(function() {
         p.append($('<option>').text(objects[i]['name']).val(objects[i]['id']))
       }
     })
-  
-    $.getJSON('/tasks', function(objects) {
+
+    var url = typeof(project_id) == 'undefined' ? '/tasks' : '/projects/'+project_id+'/tasks'
+    $.getJSON(url, function(objects) {
       var ganttData = []
       for (var i = 0; i < objects.length; i++) {
         var o = objects[i]
@@ -241,10 +245,10 @@ $(function() {
   case '#gantt':
   default:
     load_gantt()
-  } 
+  }
 
   $('#tabs ul li a[href|=#gantt]').click(function () {
-    location.hash = ''
+    location.href = ''
     load_gantt()
   })
 
